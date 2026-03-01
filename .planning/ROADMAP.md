@@ -35,7 +35,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 4 plans
 
 Plans:
-- [ ] PLAN-01 — Next.js 16 scaffold + Docker Compose PostgreSQL + environment setup
+- [x] PLAN-01 — Next.js 16 scaffold + local PostgreSQL + environment setup
 - [ ] PLAN-02 — Prisma 7 ORM setup, Application schema, and database migration
 - [ ] PLAN-03 — AES-256-GCM encryption module (TDD)
 - [ ] PLAN-04 — Application shell branding + final validation (TypeScript, ESLint, build)
@@ -152,7 +152,7 @@ Phases execute in numeric order: 1 --> 2 --> 3 --> 4 --> 5 --> 6 --> 7 --> 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Project Foundation | 0/4 | Planning complete | - |
+| 1. Project Foundation | 1/4 | In progress | - |
 | 2. Application Management | 0/2 | Not started | - |
 | 3. Repository Management | 0/2 | Not started | - |
 | 4. Scenario Authoring & History | 0/2 | Not started | - |

@@ -32,11 +32,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. PostgreSQL database is running locally via Docker Compose and Prisma migrations apply cleanly
   3. The encryption module can encrypt a plaintext string and decrypt it back to the original value using AES-256-GCM
   4. Project TypeScript compiles with zero errors and linting passes
-**Plans**: TBD
+**Plans**: 4 plans
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
+- [ ] PLAN-01 — Next.js 16 scaffold + Docker Compose PostgreSQL + environment setup
+- [ ] PLAN-02 — Prisma 7 ORM setup, Application schema, and database migration
+- [ ] PLAN-03 — AES-256-GCM encryption module (TDD)
+- [ ] PLAN-04 — Application shell branding + final validation (TypeScript, ESLint, build)
 
 ### Phase 2: Application Management
 **Goal**: Users can manage the applications they want to generate tests for, with credentials stored securely
@@ -150,7 +152,7 @@ Phases execute in numeric order: 1 --> 2 --> 3 --> 4 --> 5 --> 6 --> 7 --> 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Project Foundation | 0/2 | Not started | - |
+| 1. Project Foundation | 0/4 | Planning complete | - |
 | 2. Application Management | 0/2 | Not started | - |
 | 3. Repository Management | 0/2 | Not started | - |
 | 4. Scenario Authoring & History | 0/2 | Not started | - |

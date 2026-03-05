@@ -1,3 +1,17 @@
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+status: unknown
+last_updated: "2026-03-05T10:45:53.693Z"
+progress:
+  total_phases: 1
+  completed_phases: 0
+  total_plans: 4
+  completed_plans: 3
+  # Note: Plans 01, 02, 03 complete. Plan 04 remaining.
+---
+
 # Project State
 
 ## Project Reference
@@ -34,6 +48,7 @@ Progress: [██░░░░░░░░] 12%
 - Trend: improving
 
 *Updated after each plan completion*
+| Phase 01 P02 | 7min | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -53,6 +68,8 @@ Recent decisions affecting current work:
 - Node.js built-in crypto module for AES-256-GCM, no npm packages (Phase 1, Plan 03)
 - Vitest as test framework -- Vite-native, ESM-first (Phase 1, Plan 03)
 - Encryption output format: iv_hex:tag_hex:ciphertext_hex with colon separators (Phase 1, Plan 03)
+- [Phase 01]: Fixed DATABASE_URL password from postgres to admin for local PostgreSQL 18
+- [Phase 01]: Prisma 7 with PrismaPg adapter, prisma-client generator, custom output to generated/prisma/
 
 ### Pending Todos
 
@@ -66,26 +83,22 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-05
-Stopped at: Completed 01-03-PLAN.md (AES-256-GCM encryption TDD)
+Stopped at: Completed 01-02-PLAN.md (Prisma 7 ORM + Application model)
 Resume command: `/gsd:execute-phase 1`
-Resume file: .planning/phases/01-project-foundation/01-03-SUMMARY.md
+Resume file: .planning/phases/01-project-foundation/01-02-SUMMARY.md
 
 ## Resume Memory (for new session)
 
 ### What was done
 - Phase 1 has 4 plans across 3 waves
 - **Wave 1 (PLAN-01): COMPLETE** -- Next.js 16.1.6 scaffolded, .env configured, local PostgreSQL (no Docker)
+- **Wave 2 (PLAN-02): COMPLETE** -- Prisma 7.4 ORM with PrismaPg adapter, Application model, initial migration
 - **Wave 2 (PLAN-03): COMPLETE** -- AES-256-GCM encryption module via TDD (Vitest, 10 tests, all passing)
-- Wave 2 (PLAN-02): Status depends on parallel execution -- Prisma 7 setup
 - Wave 3 (PLAN-04): NOT STARTED -- Branding + final validation
 
 ### What to do next
-1. **Before running PLAN-02**, user must:
-   - Update `DATABASE_URL` in `.env` with their actual PostgreSQL password
-   - Create the `testforge` database: `psql -U postgres -c "CREATE DATABASE testforge;"`
-2. Execute remaining plans: `/gsd:execute-phase 1` (will skip PLAN-01 since SUMMARY exists)
-3. PLAN-02 (Prisma) and PLAN-03 (Encryption) run in parallel (Wave 2)
-4. PLAN-04 (Branding + validation) runs after both complete (Wave 3)
+1. Execute PLAN-04 (Branding + validation): `/gsd:execute-phase 1`
+2. All Wave 2 prerequisites are met (Prisma + Encryption both complete)
 
 ### Key context for executors
 - **NO DOCKER** — PostgreSQL runs locally on the machine (PostgreSQL 18 confirmed)
@@ -104,14 +117,21 @@ C:/Projects/tester agent/
 │   ├── layout.tsx
 │   ├── page.tsx
 │   └── globals.css
+├── generated/
+│   └── prisma/          (Prisma generated client -- gitignored)
 ├── lib/
+│   ├── prisma.ts        (Prisma Client singleton with PrismaPg adapter)
 │   ├── encryption.ts    (AES-256-GCM encrypt/decrypt)
 │   └── __tests__/
 │       └── encryption.test.ts (10 tests, Vitest)
+├── prisma/
+│   ├── schema.prisma    (Application model, prisma-client generator)
+│   └── migrations/      (initial migration: 20260305104120_init)
 ├── public/
-├── .env                 (local -- gitignored, needs PostgreSQL password update)
+├── .env                 (local -- gitignored, DATABASE_URL with correct password)
 ├── .env.example         (committed template)
-├── package.json         (type:module, Next.js 16, Vitest, Prisma scripts)
+├── package.json         (type:module, Next.js 16, Vitest, Prisma 7)
+├── prisma.config.ts     (Prisma 7 config with defineConfig)
 ├── tsconfig.json
 ├── next.config.ts
 ├── eslint.config.mjs

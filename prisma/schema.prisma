@@ -1,0 +1,23 @@
+// Prisma 7 schema for TestForge
+// Generator uses "prisma-client" (NOT "prisma-client-js" which is Prisma 6)
+// Output goes to generated/ directory (NOT node_modules)
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Phase 1 foundation model -- expanded in Phase 2
+model Application {
+  id            String   @id @default(cuid())
+  name          String
+  testUrl       String
+  testUsername   String   // Stored encrypted via lib/encryption.ts (AES-256-GCM)
+  testPassword   String   // Stored encrypted via lib/encryption.ts (AES-256-GCM)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}

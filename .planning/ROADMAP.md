@@ -68,11 +68,12 @@ Plans:
   3. User can set a custom output folder path for generated scripts on each connected repo
   4. User can view all connected repositories for a given application
   5. User can remove a connected repository and it no longer appears in the list
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: TBD
-- [ ] 03-02: TBD
+- [ ] 03-01-PLAN.md -- Repository data layer: Prisma model, service with PAT validation + URL parsing (TDD), Zod schema, server actions
+- [ ] 03-02-PLAN.md -- Application detail page with inline editing + ApplicationCard refactor to clickable link
+- [ ] 03-03-PLAN.md -- Repository connection modal (GitHub/ADO toggle), repo list display, inline output folder editing, delete dialog
 
 ### Phase 4: Scenario Authoring & History
 **Goal**: Users can write test scenarios in plain English and review past generation attempts with their details
@@ -156,7 +157,7 @@ Phases execute in numeric order: 1 --> 2 --> 3 --> 4 --> 5 --> 6 --> 7 --> 8
 |-------|----------------|--------|-----------|
 | 1. Project Foundation | 4/4 | Complete | 2026-03-05 |
 | 2. Application Management | 4/4 | Complete | 2026-03-08 |
-| 3. Repository Management | 0/2 | Not started | - |
+| 3. Repository Management | 0/3 | Not started | - |
 | 4. Scenario Authoring & History | 0/2 | Not started | - |
 | 5. AI Pipeline | 0/2 | Not started | - |
 | 6. Async Processing & Status | 0/2 | Not started | - |

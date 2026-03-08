@@ -50,11 +50,13 @@ Plans:
   3. User can edit any application's name, URL, or credentials and see the changes reflected immediately
   4. User can delete an application and it no longer appears in the list
   5. Stored credentials are never visible as plaintext in the database (verified by direct DB query)
-**Plans**: TBD
+**Plans**: 4 plans
 
 Plans:
-- [ ] 02-01: TBD
-- [ ] 02-02: TBD
+- [ ] 02-01-PLAN.md -- Data layer: Application service module + Zod schema + Server Actions (TDD)
+- [ ] 02-02-PLAN.md -- Navigation shell: TopNav component + purple/blue theme + layout
+- [ ] 02-03-PLAN.md -- Application CRUD UI: list page + create/edit modal + delete dialog
+- [ ] 02-04-PLAN.md -- Dashboard: stats, app overview, placeholders, Meet Your Agents
 
 ### Phase 3: Repository Management
 **Goal**: Users can connect their GitHub and Azure DevOps repositories and configure where generated scripts should be placed

@@ -5,15 +5,27 @@ import { redirect } from "next/navigation";
 import { applicationSchema } from "@/lib/schemas/application";
 import {
   createApplication,
+  getApplication,
   updateApplication,
   deleteApplication,
 } from "@/lib/applications";
+import type { ApplicationView } from "@/lib/applications";
 
 export type ActionState = {
   success: boolean;
   errors?: Record<string, string[]>;
   message?: string;
 };
+
+/**
+ * Server Action to fetch a single application with decrypted credentials.
+ * Used by the edit modal to pre-fill form fields.
+ */
+export async function getApplicationAction(
+  id: string
+): Promise<ApplicationView | null> {
+  return getApplication(id);
+}
 
 /**
  * Server Action to create a new application.

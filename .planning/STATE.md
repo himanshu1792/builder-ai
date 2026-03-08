@@ -2,8 +2,8 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-last_updated: "2026-03-08T08:31:28.948Z"
+status: unknown
+last_updated: "2026-03-08T08:33:02.852Z"
 progress:
   total_phases: 2
   completed_phases: 1
@@ -51,6 +51,7 @@ Progress: [█████░░░░░] 50% (Phase 2)
 | Phase 01 P02 | 7min | 2 tasks | 6 files |
 | Phase 01 P04 | 11min | 2 tasks | 5 files |
 | Phase 02 P02 | 2min | 2 tasks | 3 files |
+| Phase 02 P01 | 4min | 3 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -77,6 +78,9 @@ Recent decisions affecting current work:
 - [Phase 02]: Tailwind CSS 4 @theme with 15 semantic color tokens for purple/blue theme (Phase 2, Plan 02)
 - [Phase 02]: SVG shield-with-checkmark icon for TestForge branding (Phase 2, Plan 02)
 - [Phase 02]: Coming Soon items use inline "Soon" badge (not tooltip) for immediate visibility (Phase 2, Plan 02)
+- [Phase 02]: Zod v4 with { error: '...' } syntax for custom validation messages (Phase 2, Plan 01)
+- [Phase 02]: Service layer pattern: Server Actions always go through lib/applications.ts, never call Prisma directly (Phase 2, Plan 01)
+- [Phase 02]: vitest-mock-extended 3.1.0 confirmed compatible with Vitest 4.0.18 (Phase 2, Plan 01)
 
 ### Pending Todos
 

@@ -13,11 +13,26 @@ datasource db {
 
 // Phase 1 foundation model -- expanded in Phase 2
 model Application {
-  id            String   @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String
   testUrl       String
-  testUsername   String   // Stored encrypted via lib/encryption.ts (AES-256-GCM)
-  testPassword   String   // Stored encrypted via lib/encryption.ts (AES-256-GCM)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  testUsername   String       // Stored encrypted via lib/encryption.ts (AES-256-GCM)
+  testPassword   String       // Stored encrypted via lib/encryption.ts (AES-256-GCM)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  repositories  Repository[]
+}
+
+// Phase 3 -- Repository connection for GitHub and Azure DevOps
+model Repository {
+  id             String      @id @default(cuid())
+  provider       String      // "github" or "ado"
+  repoUrl        String
+  pat            String      // Encrypted via lib/encryption.ts (AES-256-GCM)
+  organization   String?     // Required for ADO, null for GitHub
+  outputFolder   String      // e.g., "tests/my-web-app"
+  applicationId  String
+  application    Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
 }

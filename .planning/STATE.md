@@ -92,7 +92,7 @@ Recent decisions affecting current work:
 
 ### Pending Todos
 
-None yet.
+- **[Phase 3]** User wants repo connection (GitHub/ADO PAT + repo selector) tied to applications in the UX. Keeping repos as separate entity but ensure the UI links them clearly from the application context. (HIGH priority)
 
 ### Blockers/Concerns
 
@@ -102,9 +102,9 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-08
-Stopped at: Completed 02-04-PLAN.md (Dashboard Page) -- Phase 2 COMPLETE
-Resume command: `/gsd:execute-phase 03` (start Phase 3)
-Resume file: .planning/phases/02-application-management/02-04-SUMMARY.md
+Stopped at: Phase 3 context gathered
+Resume command: `/gsd:plan-phase 3`
+Resume file: .planning/phases/03-repository-management/03-CONTEXT.md
 
 ## Resume Memory (for new session)
 

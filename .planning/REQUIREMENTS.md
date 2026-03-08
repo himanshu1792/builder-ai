@@ -10,7 +10,7 @@ No authentication for v1. Single-user, runs locally.
 ### Application Management
 
 - [ ] **APP-01**: User can register an application with name, URL, username, and password for testing
-- [ ] **APP-02**: User can view list of registered applications
+- [x] **APP-02**: User can view list of registered applications
 - [ ] **APP-03**: User can edit application details (name, URL, credentials)
 - [ ] **APP-04**: User can delete an application
 - [x] **APP-05**: Application credentials are stored encrypted at rest (AES-256)
@@ -95,7 +95,7 @@ Deferred to future release. Tracked but not in current roadmap.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | APP-01 | Phase 2 | Pending |
-| APP-02 | Phase 2 | Pending |
+| APP-02 | Phase 2 | Complete |
 | APP-03 | Phase 2 | Pending |
 | APP-04 | Phase 2 | Pending |
 | APP-05 | Phase 1 | Complete |

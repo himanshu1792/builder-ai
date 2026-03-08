@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { listApplications } from "@/lib/applications";
 import { DashboardStats } from "./components/DashboardStats";
+import { AgentShowcase } from "./components/AgentShowcase";
 
 function timeAgo(date: Date): string {
   const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
@@ -271,6 +272,9 @@ export default async function Dashboard() {
           </div>
         </div>
       </div>
+
+      {/* Meet Your Agents */}
+      <AgentShowcase />
     </div>
   );
 }

@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in-progress
-last_updated: "2026-03-08T18:46:23Z"
+last_updated: "2026-03-09T09:36:34Z"
 progress:
   total_phases: 3
   completed_phases: 2
   total_plans: 11
-  completed_plans: 9
+  completed_plans: 10
 ---
 
 # Project State
@@ -18,23 +18,23 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-01)
 
 **Core value:** Users describe what to test in plain English and get a ready-to-merge PR with working Playwright scripts -- no manual test code writing required.
-**Current focus:** Phase 2: Application Management -- COMPLETE
+**Current focus:** Phase 3: Repository Management -- IN PROGRESS
 
 ## Current Position
 
 Phase: 3 of 8 (Repository Management)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: In Progress
-Last activity: 2026-03-08 -- Completed Plan 01 (Repository Data Layer)
+Last activity: 2026-03-09 -- Completed Plan 02 (Application Detail Page)
 
-Progress: [███-------] 33% (Phase 3)
+Progress: [██████----] 67% (Phase 3)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 9
+- Total plans completed: 10
 - Average duration: 8 min
-- Total execution time: 1.2 hours
+- Total execution time: 1.3 hours
 
 **By Phase:**
 
@@ -42,10 +42,10 @@ Progress: [███-------] 33% (Phase 3)
 |-------|-------|-------|----------|
 | 1 - Project Foundation | 4 | 32 min | 8 min |
 | 2 - Application Management | 4/4 | 33 min | 8 min |
-| 3 - Repository Management | 1/3 | 4 min | 4 min |
+| 3 - Repository Management | 2/3 | 9 min | 5 min |
 
 **Recent Trend:**
-- Last 5 plans: 11m, 2m, 21m, 8m, 4m
+- Last 5 plans: 2m, 21m, 8m, 4m, 5m
 - Trend: stable
 
 *Updated after each plan completion*
@@ -56,6 +56,7 @@ Progress: [███-------] 33% (Phase 3)
 | Phase 02 P03 | 21min | 3 tasks | 7 files |
 | Phase 02 P04 | 8min | 3 tasks | 3 files |
 | Phase 03 P01 | 4min | 3 tasks | 6 files |
+| Phase 03 P02 | 5min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -95,6 +96,10 @@ Recent decisions affecting current work:
 - [Phase 03]: Fine-grained GitHub PATs treated as valid on 200 response (no X-OAuth-Scopes header) (Phase 3, Plan 01)
 - [Phase 03]: Both ADO URL formats supported: dev.azure.com and visualstudio.com (Phase 3, Plan 01)
 - [Phase 03]: Zod refinements for provider-specific URL patterns and conditional ADO organization requirement (Phase 3, Plan 01)
+- [Phase 03]: Detail page pattern: Server Component fetches data, AppDetailClient manages edit/delete/repo state (Phase 3, Plan 02)
+- [Phase 03]: Inline editing via useActionState with bind(null, id) -- same pattern as edit modal but embedded in page (Phase 3, Plan 02)
+- [Phase 03]: ApplicationCard converted from div to Link component, removing all edit/delete actions from list page (Phase 3, Plan 02)
+- [Phase 03]: Delete dialog on detail page includes repository count warning for connected repos (Phase 3, Plan 02)
 
 ### Pending Todos
 
@@ -107,10 +112,10 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-03-08
-Stopped at: Completed 03-01-PLAN.md (Repository Data Layer)
-Resume command: `/gsd:execute-phase 3` (continue with Plan 02)
-Resume file: .planning/phases/03-repository-management/03-02-PLAN.md
+Last session: 2026-03-09
+Stopped at: Completed 03-02-PLAN.md (Application Detail Page)
+Resume command: `/gsd:execute-phase 3` (continue with Plan 03)
+Resume file: .planning/phases/03-repository-management/03-03-PLAN.md
 
 ## Resume Memory (for new session)
 
@@ -121,13 +126,14 @@ Resume file: .planning/phases/03-repository-management/03-02-PLAN.md
   - **PLAN-02: COMPLETE** -- TopNav component, purple/blue theme, navigation shell
   - **PLAN-03: COMPLETE** -- Application CRUD UI: list page, create/edit modal, delete dialog
   - **PLAN-04: COMPLETE** -- Dashboard page with stats, app overview, Meet Your Agents
-- **Phase 3: IN PROGRESS** (1/3 plans done)
+- **Phase 3: IN PROGRESS** (2/3 plans done)
   - **PLAN-01: COMPLETE** -- Repository data layer (TDD): Prisma model, service CRUD, PAT validation, URL parsing, Zod schema, server actions
+  - **PLAN-02: COMPLETE** -- Application detail page with inline editing, delete, Connected Repositories placeholder; ApplicationCard refactored to clickable link
 
 ### What to do next
-1. Continue Phase 3 execution with Plan 02 (App Detail Page + Repository UI)
-2. Repository data layer is ready for UI consumption
-3. Server actions and service functions ready for form/page integration
+1. Continue Phase 3 execution with Plan 03 (Repository Connection UI)
+2. Detail page is ready with Connected Repositories placeholder section
+3. "Connect Repository" button needs activation and modal wiring in Plan 03
 
 ### Key context for executors
 - **NO DOCKER** -- PostgreSQL runs locally on the machine (PostgreSQL 18 confirmed)
@@ -136,12 +142,14 @@ Resume file: .planning/phases/03-repository-management/03-02-PLAN.md
 - Next.js 16.1.6, React 19, TypeScript strict, Tailwind CSS 4, ESLint 9 flat config
 - Prisma 7.4 requires: `@prisma/adapter-pg`, `prisma.config.ts`, custom output path, `prisma-client` generator
 - `prebuild` script runs `prisma generate` before `next build`
-- Vitest for testing (27 tests passing: 10 encryption + 17 application service)
+- Vitest for testing (61 tests passing: 10 encryption + 17 application service + 34 repository service)
 - **TopNav** with TestForge logo, Dashboard/Applications links, Coming Soon items
 - **Theme** via Tailwind @theme: bg-primary, text-primary, bg-nav-hover, etc.
 - **Dashboard** at `/` with stats cards, recent apps, placeholder sections, agent showcase
-- **Applications page** at `/applications` with card list, create/edit modal, delete dialog
+- **Applications page** at `/applications` with card list (clickable links), create-only modal
+- **Application detail page** at `/applications/[id]` with inline editing, delete, repo section placeholder
 - **Modal pattern**: Server Component page + Client wrapper for interactive state
+- **Detail page pattern**: Server Component fetch + AppDetailClient wrapper for editing/delete/repo state
 - **Components directory** established at app/components/ (TopNav, DashboardStats, AgentShowcase)
 - **Application components** at app/applications/components/ (ApplicationCard, ApplicationsClient, ApplicationModal, DeleteDialog)
 - Plans are at: `.planning/phases/02-application-management/02-01-PLAN.md` through `02-04-PLAN.md`
@@ -161,9 +169,14 @@ C:/Projects/tester agent/
 │   │   └── AgentShowcase.tsx  (Animated agent cards)
 │   └── applications/
 │       ├── page.tsx     (Server Component: app list page)
+│       ├── [id]/
+│       │   ├── page.tsx              (Server Component: app detail page)
+│       │   └── components/
+│       │       ├── AppDetailClient.tsx  (Client wrapper: edit/delete/repo state)
+│       │       └── AppDetailHeader.tsx  (Inline view/edit mode with form)
 │       └── components/
-│           ├── ApplicationsClient.tsx  (Client wrapper for modal state)
-│           ├── ApplicationCard.tsx     (Card with edit/delete actions)
+│           ├── ApplicationsClient.tsx  (Client wrapper for create modal)
+│           ├── ApplicationCard.tsx     (Clickable link card to detail page)
 │           ├── ApplicationModal.tsx    (Create/edit form modal)
 │           ├── PasswordField.tsx       (Password input with eye toggle)
 │           └── DeleteDialog.tsx        (Delete confirmation dialog)

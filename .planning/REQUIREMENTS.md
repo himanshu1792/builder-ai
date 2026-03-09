@@ -20,7 +20,7 @@ No authentication for v1. Single-user, runs locally.
 - [x] **REPO-01**: User can connect a GitHub repo by providing repo URL and Personal Access Token
 - [x] **REPO-02**: User can connect an Azure DevOps repo by providing repo URL, PAT, and org name
 - [x] **REPO-03**: User can configure output folder path for generated scripts per repo
-- [ ] **REPO-04**: User can view list of connected repos for an application
+- [x] **REPO-04**: User can view list of connected repos for an application
 - [x] **REPO-05**: User can remove a connected repo
 
 ### Test Scenarios
@@ -102,7 +102,7 @@ Deferred to future release. Tracked but not in current roadmap.
 | REPO-01 | Phase 3 | Complete |
 | REPO-02 | Phase 3 | Complete |
 | REPO-03 | Phase 3 | Complete |
-| REPO-04 | Phase 3 | Pending |
+| REPO-04 | Phase 3 | Complete |
 | REPO-05 | Phase 3 | Complete |
 | SCEN-01 | Phase 4 | Pending |
 | SCEN-02 | Phase 4 | Pending |

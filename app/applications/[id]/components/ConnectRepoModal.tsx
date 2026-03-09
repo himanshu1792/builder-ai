@@ -4,7 +4,7 @@ import { useActionState, useEffect, useRef, useState } from "react";
 import { connectRepositoryAction } from "@/lib/actions/repositories";
 import type { ActionState } from "@/lib/actions/applications";
 import { PasswordField } from "@/app/applications/components/PasswordField";
-import { slugify } from "@/lib/repositories";
+import { slugify } from "@/lib/repository-utils";
 
 interface ConnectRepoModalProps {
   applicationId: string;

@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import type { ApplicationListItem, ApplicationView } from "@/lib/applications";
+import { useState } from "react";
+import type { ApplicationListItem } from "@/lib/applications";
 import { ApplicationCard } from "./ApplicationCard";
 import { ApplicationModal } from "./ApplicationModal";
-import { DeleteDialog } from "./DeleteDialog";
 
 interface ApplicationsClientProps {
   applications: ApplicationListItem[];
@@ -14,30 +13,6 @@ export function ApplicationsClient({
   applications,
 }: ApplicationsClientProps) {
   const [createOpen, setCreateOpen] = useState(false);
-  const [editApp, setEditApp] = useState<ApplicationView | null>(null);
-  const [editOpen, setEditOpen] = useState(false);
-  const [deleteTarget, setDeleteTarget] = useState<{
-    id: string;
-    name: string;
-  } | null>(null);
-  const [, startTransition] = useTransition();
-
-  function handleEdit(id: string) {
-    startTransition(async () => {
-      const { getApplicationAction } = await import(
-        "@/lib/actions/applications"
-      );
-      const app = await getApplicationAction(id);
-      if (app) {
-        setEditApp(app);
-        setEditOpen(true);
-      }
-    });
-  }
-
-  function handleDelete(id: string, name: string) {
-    setDeleteTarget({ id, name });
-  }
 
   return (
     <>
@@ -167,8 +142,6 @@ export function ApplicationsClient({
             <ApplicationCard
               key={app.id}
               application={app}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
             />
           ))}
         </div>
@@ -180,29 +153,6 @@ export function ApplicationsClient({
         isOpen={createOpen}
         onClose={() => setCreateOpen(false)}
       />
-
-      {/* Edit Modal */}
-      {editApp && (
-        <ApplicationModal
-          mode="edit"
-          application={editApp}
-          isOpen={editOpen}
-          onClose={() => {
-            setEditOpen(false);
-            setEditApp(null);
-          }}
-        />
-      )}
-
-      {/* Delete Dialog */}
-      {deleteTarget && (
-        <DeleteDialog
-          applicationId={deleteTarget.id}
-          applicationName={deleteTarget.name}
-          isOpen={!!deleteTarget}
-          onClose={() => setDeleteTarget(null)}
-        />
-      )}
     </>
   );
 }

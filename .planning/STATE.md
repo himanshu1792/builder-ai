@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in-progress
-last_updated: "2026-03-11T18:04:51Z"
+last_updated: "2026-03-11T18:14:04Z"
 progress:
   total_phases: 4
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 13
-  completed_plans: 12
+  completed_plans: 13
 ---
 
 # Project State
@@ -18,23 +18,23 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-01)
 
 **Core value:** Users describe what to test in plain English and get a ready-to-merge PR with working Playwright scripts -- no manual test code writing required.
-**Current focus:** Phase 4: Scenario Authoring & History -- IN PROGRESS
+**Current focus:** Phase 4: Scenario Authoring & History -- COMPLETE
 
 ## Current Position
 
-Phase: 4 of 8 (Scenario Authoring & History)
-Plan: 1 of 2 in current phase
-Status: Executing Phase 4 (Plan 01 complete, Plan 02 pending)
-Last activity: 2026-03-11 -- Completed Plan 04-01 (Scenario data layer: Prisma model, service TDD, Zod schema, server action)
+Phase: 4 of 8 (Scenario Authoring & History) -- COMPLETE
+Plan: 2 of 2 in current phase (all plans complete)
+Status: Phase 4 complete, ready for Phase 5
+Last activity: 2026-03-11 -- Completed Plan 04-02 (Scenario UI: list, form, detail pages, TopNav update)
 
-Progress: [#####░░░░░] 50% (Phase 4)
+Progress: [##########] 100% (Phase 4)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 12
+- Total plans completed: 13
 - Average duration: 7 min
-- Total execution time: 1.6 hours
+- Total execution time: 1.7 hours
 
 **By Phase:**
 
@@ -43,10 +43,10 @@ Progress: [#####░░░░░] 50% (Phase 4)
 | 1 - Project Foundation | 4 | 32 min | 8 min |
 | 2 - Application Management | 4/4 | 33 min | 8 min |
 | 3 - Repository Management | 3/3 | 20 min | 7 min |
-| 4 - Scenario Authoring | 1/2 | 4 min | 4 min |
+| 4 - Scenario Authoring | 2/2 | 9 min | 5 min |
 
 **Recent Trend:**
-- Last 5 plans: 8m, 4m, 5m, 11m, 4m
+- Last 5 plans: 4m, 5m, 11m, 4m, 5m
 - Trend: stable
 
 *Updated after each plan completion*
@@ -60,6 +60,7 @@ Progress: [#####░░░░░] 50% (Phase 4)
 | Phase 03 P02 | 5min | 2 tasks | 5 files |
 | Phase 03 P03 | 11min | 3 tasks | 7 files |
 | Phase 04 P01 | 4min | 3 tasks | 6 files |
+| Phase 04 P02 | 5min | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -111,11 +112,15 @@ Recent decisions affecting current work:
 - [Phase 04]: Forward-compatible nullable fields (refinedPrompt, generatedScript, errorMessage) avoid breaking migrations in Phase 5/6 (Phase 4, Plan 01)
 - [Phase 04]: listAllRepositoriesGrouped groups repos by applicationId for dependent dropdown in scenario creation form (Phase 4, Plan 01)
 - [Phase 04]: Server action validates app existence, repo existence, AND repo-app ownership before creating scenario (Phase 4, Plan 01)
+- [Phase 04]: Dependent dropdown uses key prop reset: changing app resets repo select by changing its React key (Phase 4, Plan 02)
+- [Phase 04]: ScenarioList is a Server Component (no "use client") using Link for navigation (Phase 4, Plan 02)
+- [Phase 04]: StatusBadge is pure render component with fallback to queued config for unknown statuses (Phase 4, Plan 02)
+- [Phase 04]: Relative time formatter is inline utility -- no external date library needed (Phase 4, Plan 02)
 
 ### Pending Todos
 
 - ~~**[Phase 3]** User wants repo connection (GitHub/ADO PAT + repo selector) tied to applications in the UX.~~ RESOLVED: Repos connected from application detail page with ConnectRepoModal.
-- **[Phase 4]** Test scenario authoring UI needs to integrate with application and repository selection.
+- ~~**[Phase 4]** Test scenario authoring UI needs to integrate with application and repository selection.~~ RESOLVED: Scenario form at /scenarios/new with dependent app/repo dropdowns.
 
 ### Blockers/Concerns
 
@@ -125,9 +130,9 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-03-11
-Stopped at: Completed 04-01-PLAN.md (Scenario data layer)
-Resume command: `/gsd:execute-phase 4` (continue Phase 4: Scenario Authoring & History)
-Resume file: .planning/phases/04-scenario-authoring-history/04-02-PLAN.md
+Stopped at: Completed 04-02-PLAN.md (Scenario UI)
+Resume command: `/gsd:execute-phase 5` (start Phase 5: AI Pipeline)
+Resume file: .planning/phases/05-ai-pipeline/ (next phase)
 
 ## Resume Memory (for new session)
 
@@ -142,12 +147,13 @@ Resume file: .planning/phases/04-scenario-authoring-history/04-02-PLAN.md
   - **PLAN-01: COMPLETE** -- Repository data layer (TDD): Prisma model, service CRUD, PAT validation, URL parsing, Zod schema, server actions
   - **PLAN-02: COMPLETE** -- Application detail page with inline editing, delete, Connected Repositories placeholder; ApplicationCard refactored to clickable link
   - **PLAN-03: COMPLETE** -- Repository connection UI: ConnectRepoModal with GitHub/ADO toggle, RepositoryList, inline editing, delete dialog; client/server utility separation
-- **Phase 4: IN PROGRESS** (1/2 plans done)
+- **Phase 4: COMPLETE** (2/2 plans done)
   - **PLAN-01: COMPLETE** -- Scenario data layer (TDD): Prisma Scenario model, service CRUD + listAllRepositoriesGrouped, Zod schema, server action with cross-entity validation
+  - **PLAN-02: COMPLETE** -- Scenario UI: /scenarios list page with StatusBadge, /scenarios/new form with dependent app/repo dropdowns, /scenarios/[id] detail with multi-section layout, TopNav updated
 
 ### What to do next
-1. Continue Phase 4 (Scenario Authoring & History) -- `/gsd:execute-phase 4`
-2. Wave 2: Plan 04-02 builds Scenario UI (/scenarios list, /scenarios/new form, /scenarios/[id] detail, TopNav update)
+1. Start Phase 5 (AI Pipeline) -- `/gsd:execute-phase 5`
+2. Phase 5 will populate refinedPrompt and generatedScript fields that Phase 4 UI already handles with placeholders
 
 ### Key context for executors
 - **NO DOCKER** -- PostgreSQL runs locally on the machine (PostgreSQL 18 confirmed)
@@ -157,7 +163,7 @@ Resume file: .planning/phases/04-scenario-authoring-history/04-02-PLAN.md
 - Prisma 7.4 requires: `@prisma/adapter-pg`, `prisma.config.ts`, custom output path, `prisma-client` generator
 - `prebuild` script runs `prisma generate` before `next build`
 - Vitest for testing (73 tests passing: 10 encryption + 17 application + 34 repository + 12 scenario)
-- **TopNav** with TestForge logo, Dashboard/Applications links, Coming Soon items
+- **TopNav** with TestForge logo, Dashboard/Applications/Scenarios links, Coming Soon items
 - **Theme** via Tailwind @theme: bg-primary, text-primary, bg-nav-hover, etc.
 - **Dashboard** at `/` with stats cards, recent apps, placeholder sections, agent showcase
 - **Applications page** at `/applications` with card list (clickable links), create-only modal
@@ -171,8 +177,11 @@ Resume file: .planning/phases/04-scenario-authoring-history/04-02-PLAN.md
 - **Scenario service** at lib/scenarios.ts with createScenario, listScenarios, getScenario, listAllRepositoriesGrouped
 - **Scenario schema** at lib/schemas/scenario.ts with inputText (10-5000), applicationId, repositoryId validation
 - **Scenario action** at lib/actions/scenarios.ts with cross-entity validation (app exists, repo exists, repo belongs to app)
+- **Scenario pages** at app/scenarios/ with list, new form (dependent dropdowns), and [id] detail (multi-section layout)
+- **Scenario components** at app/scenarios/components/ (ScenarioList, ScenarioForm, StatusBadge)
+- **Scenario detail components** at app/scenarios/[id]/components/ (ScenarioDetailClient)
 - Plans are at: `.planning/phases/04-scenario-authoring-history/04-01-PLAN.md` through `04-02-PLAN.md`
-- Summaries at: `.planning/phases/04-scenario-authoring-history/04-01-SUMMARY.md`
+- Summaries at: `.planning/phases/04-scenario-authoring-history/04-01-SUMMARY.md` through `04-02-SUMMARY.md`
 
 ### File structure
 ```
@@ -186,24 +195,36 @@ C:/Projects/tester agent/
 │   │   ├── TopNav.tsx       (Navigation bar with active states)
 │   │   ├── DashboardStats.tsx (Stats card grid)
 │   │   └── AgentShowcase.tsx  (Animated agent cards)
-│   └── applications/
-│       ├── page.tsx     (Server Component: app list page)
+│   ├── applications/
+│   │   ├── page.tsx     (Server Component: app list page)
+│   │   ├── [id]/
+│   │   │   ├── page.tsx              (Server Component: app detail page)
+│   │   │   └── components/
+│   │   │       ├── AppDetailClient.tsx  (Client wrapper: edit/delete/repo state)
+│   │   │       ├── AppDetailHeader.tsx  (Inline view/edit mode with form)
+│   │   │       ├── ConnectRepoModal.tsx (GitHub/ADO toggle + form modal)
+│   │   │       ├── RepositoryList.tsx   (Repo list with empty state + count badge)
+│   │   │       ├── RepositoryRow.tsx    (Provider icon, name, folder, hover actions)
+│   │   │       ├── EditRepoRow.tsx      (Inline output folder editing)
+│   │   │       └── DeleteRepoDialog.tsx (Disconnect confirmation dialog)
+│   │   └── components/
+│   │       ├── ApplicationsClient.tsx  (Client wrapper for create modal)
+│   │       ├── ApplicationCard.tsx     (Clickable link card to detail page)
+│   │       ├── ApplicationModal.tsx    (Create/edit form modal)
+│   │       ├── PasswordField.tsx       (Password input with eye toggle)
+│   │       └── DeleteDialog.tsx        (Delete confirmation dialog)
+│   └── scenarios/
+│       ├── page.tsx     (Server Component: scenario list page)
+│       ├── new/
+│       │   └── page.tsx             (Server Component: new scenario form)
 │       ├── [id]/
-│       │   ├── page.tsx              (Server Component: app detail page)
+│       │   ├── page.tsx             (Server Component: scenario detail page)
 │       │   └── components/
-│       │       ├── AppDetailClient.tsx  (Client wrapper: edit/delete/repo state)
-│       │       ├── AppDetailHeader.tsx  (Inline view/edit mode with form)
-│       │       ├── ConnectRepoModal.tsx (GitHub/ADO toggle + form modal)
-│       │       ├── RepositoryList.tsx   (Repo list with empty state + count badge)
-│       │       ├── RepositoryRow.tsx    (Provider icon, name, folder, hover actions)
-│       │       ├── EditRepoRow.tsx      (Inline output folder editing)
-│       │       └── DeleteRepoDialog.tsx (Disconnect confirmation dialog)
+│       │       └── ScenarioDetailClient.tsx (Client: multi-section detail layout)
 │       └── components/
-│           ├── ApplicationsClient.tsx  (Client wrapper for create modal)
-│           ├── ApplicationCard.tsx     (Clickable link card to detail page)
-│           ├── ApplicationModal.tsx    (Create/edit form modal)
-│           ├── PasswordField.tsx       (Password input with eye toggle)
-│           └── DeleteDialog.tsx        (Delete confirmation dialog)
+│           ├── ScenarioList.tsx      (Scenario card list with empty state)
+│           ├── ScenarioForm.tsx      (Client: textarea, dependent dropdowns)
+│           └── StatusBadge.tsx       (Color-coded status badge)
 ├── generated/
 │   └── prisma/          (Prisma generated client -- gitignored)
 ├── lib/

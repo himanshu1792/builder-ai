@@ -21,6 +21,7 @@ model Application {
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
   repositories  Repository[]
+  scenarios     Scenario[]
 }
 
 // Phase 3 -- Repository connection for GitHub and Azure DevOps
@@ -33,6 +34,23 @@ model Repository {
   outputFolder   String      // e.g., "tests/my-web-app"
   applicationId  String
   application    Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  scenarios      Scenario[]
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
+}
+
+// Phase 4 -- Test scenario authoring with forward-compatible fields
+model Scenario {
+  id              String      @id @default(cuid())
+  inputText       String      // Plain-English scenario text from user
+  status          String      @default("queued") // queued, in_progress, completed, failed
+  refinedPrompt   String?     // Populated by Phase 5 (AI refinement)
+  generatedScript String?     // Populated by Phase 5 (AI generation)
+  errorMessage    String?     // Populated on failure (Phase 5/6)
+  applicationId   String
+  application     Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  repositoryId    String
+  repository      Repository  @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
 }

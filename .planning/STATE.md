@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in-progress
-last_updated: "2026-03-09T09:55:26Z"
+last_updated: "2026-03-11T18:04:51Z"
 progress:
-  total_phases: 3
+  total_phases: 4
   completed_phases: 3
-  total_plans: 11
-  completed_plans: 11
+  total_plans: 13
+  completed_plans: 12
 ---
 
 # Project State
@@ -18,23 +18,23 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-01)
 
 **Core value:** Users describe what to test in plain English and get a ready-to-merge PR with working Playwright scripts -- no manual test code writing required.
-**Current focus:** Phase 4: Scenario Authoring & History -- PLANNED
+**Current focus:** Phase 4: Scenario Authoring & History -- IN PROGRESS
 
 ## Current Position
 
 Phase: 4 of 8 (Scenario Authoring & History)
-Plan: 0 of 2 in current phase
-Status: Plans Created, Ready for Execution
-Last activity: 2026-03-09 -- Created Phase 4 plans (2 plans across 2 waves)
+Plan: 1 of 2 in current phase
+Status: Executing Phase 4 (Plan 01 complete, Plan 02 pending)
+Last activity: 2026-03-11 -- Completed Plan 04-01 (Scenario data layer: Prisma model, service TDD, Zod schema, server action)
 
-Progress: [░░░░░░░░░░] 0% (Phase 4)
+Progress: [#####░░░░░] 50% (Phase 4)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 11
-- Average duration: 8 min
-- Total execution time: 1.5 hours
+- Total plans completed: 12
+- Average duration: 7 min
+- Total execution time: 1.6 hours
 
 **By Phase:**
 
@@ -43,9 +43,10 @@ Progress: [░░░░░░░░░░] 0% (Phase 4)
 | 1 - Project Foundation | 4 | 32 min | 8 min |
 | 2 - Application Management | 4/4 | 33 min | 8 min |
 | 3 - Repository Management | 3/3 | 20 min | 7 min |
+| 4 - Scenario Authoring | 1/2 | 4 min | 4 min |
 
 **Recent Trend:**
-- Last 5 plans: 21m, 8m, 4m, 5m, 11m
+- Last 5 plans: 8m, 4m, 5m, 11m, 4m
 - Trend: stable
 
 *Updated after each plan completion*
@@ -58,6 +59,7 @@ Progress: [░░░░░░░░░░] 0% (Phase 4)
 | Phase 03 P01 | 4min | 3 tasks | 6 files |
 | Phase 03 P02 | 5min | 2 tasks | 5 files |
 | Phase 03 P03 | 11min | 3 tasks | 7 files |
+| Phase 04 P01 | 4min | 3 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -106,6 +108,9 @@ Recent decisions affecting current work:
 - [Phase 03]: Hover-reveal row actions: group + group-hover:opacity-100 pattern for edit/delete buttons on list rows (Phase 3, Plan 03)
 - [Phase 03]: Inline row editing: isEditing state delegates from display component to edit component (Phase 3, Plan 03)
 - [Phase 03]: Delete repo dialog uses "Disconnect" terminology to clarify the repository itself is unaffected (Phase 3, Plan 03)
+- [Phase 04]: Forward-compatible nullable fields (refinedPrompt, generatedScript, errorMessage) avoid breaking migrations in Phase 5/6 (Phase 4, Plan 01)
+- [Phase 04]: listAllRepositoriesGrouped groups repos by applicationId for dependent dropdown in scenario creation form (Phase 4, Plan 01)
+- [Phase 04]: Server action validates app existence, repo existence, AND repo-app ownership before creating scenario (Phase 4, Plan 01)
 
 ### Pending Todos
 
@@ -119,10 +124,10 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-03-09
-Stopped at: Phase 4 plans created (2 plans across 2 waves)
-Resume command: `/gsd:execute-phase 4` (execute Phase 4: Scenario Authoring & History)
-Resume file: .planning/phases/04-scenario-authoring-history/04-01-PLAN.md
+Last session: 2026-03-11
+Stopped at: Completed 04-01-PLAN.md (Scenario data layer)
+Resume command: `/gsd:execute-phase 4` (continue Phase 4: Scenario Authoring & History)
+Resume file: .planning/phases/04-scenario-authoring-history/04-02-PLAN.md
 
 ## Resume Memory (for new session)
 
@@ -137,11 +142,12 @@ Resume file: .planning/phases/04-scenario-authoring-history/04-01-PLAN.md
   - **PLAN-01: COMPLETE** -- Repository data layer (TDD): Prisma model, service CRUD, PAT validation, URL parsing, Zod schema, server actions
   - **PLAN-02: COMPLETE** -- Application detail page with inline editing, delete, Connected Repositories placeholder; ApplicationCard refactored to clickable link
   - **PLAN-03: COMPLETE** -- Repository connection UI: ConnectRepoModal with GitHub/ADO toggle, RepositoryList, inline editing, delete dialog; client/server utility separation
+- **Phase 4: IN PROGRESS** (1/2 plans done)
+  - **PLAN-01: COMPLETE** -- Scenario data layer (TDD): Prisma Scenario model, service CRUD + listAllRepositoriesGrouped, Zod schema, server action with cross-entity validation
 
 ### What to do next
-1. Execute Phase 4 (Scenario Authoring & History) -- `/gsd:execute-phase 4`
-2. Wave 1: Plan 04-01 builds Scenario data layer (Prisma model, service TDD, Zod schema, server action)
-3. Wave 2: Plan 04-02 builds Scenario UI (/scenarios list, /scenarios/new form, /scenarios/[id] detail, TopNav update)
+1. Continue Phase 4 (Scenario Authoring & History) -- `/gsd:execute-phase 4`
+2. Wave 2: Plan 04-02 builds Scenario UI (/scenarios list, /scenarios/new form, /scenarios/[id] detail, TopNav update)
 
 ### Key context for executors
 - **NO DOCKER** -- PostgreSQL runs locally on the machine (PostgreSQL 18 confirmed)
@@ -150,7 +156,7 @@ Resume file: .planning/phases/04-scenario-authoring-history/04-01-PLAN.md
 - Next.js 16.1.6, React 19, TypeScript strict, Tailwind CSS 4, ESLint 9 flat config
 - Prisma 7.4 requires: `@prisma/adapter-pg`, `prisma.config.ts`, custom output path, `prisma-client` generator
 - `prebuild` script runs `prisma generate` before `next build`
-- Vitest for testing (61 tests passing: 10 encryption + 17 application service + 34 repository service)
+- Vitest for testing (73 tests passing: 10 encryption + 17 application + 34 repository + 12 scenario)
 - **TopNav** with TestForge logo, Dashboard/Applications links, Coming Soon items
 - **Theme** via Tailwind @theme: bg-primary, text-primary, bg-nav-hover, etc.
 - **Dashboard** at `/` with stats cards, recent apps, placeholder sections, agent showcase
@@ -162,8 +168,11 @@ Resume file: .planning/phases/04-scenario-authoring-history/04-01-PLAN.md
 - **Application components** at app/applications/components/ (ApplicationCard, ApplicationsClient, ApplicationModal, DeleteDialog, PasswordField)
 - **Repository components** at app/applications/[id]/components/ (ConnectRepoModal, RepositoryList, RepositoryRow, EditRepoRow, DeleteRepoDialog)
 - **Client/server boundary**: lib/repository-utils.ts for client components, lib/repositories.ts for server-only
-- Plans are at: `.planning/phases/03-repository-management/03-01-PLAN.md` through `03-03-PLAN.md`
-- Summaries at: `.planning/phases/03-repository-management/03-03-SUMMARY.md`
+- **Scenario service** at lib/scenarios.ts with createScenario, listScenarios, getScenario, listAllRepositoriesGrouped
+- **Scenario schema** at lib/schemas/scenario.ts with inputText (10-5000), applicationId, repositoryId validation
+- **Scenario action** at lib/actions/scenarios.ts with cross-entity validation (app exists, repo exists, repo belongs to app)
+- Plans are at: `.planning/phases/04-scenario-authoring-history/04-01-PLAN.md` through `04-02-PLAN.md`
+- Summaries at: `.planning/phases/04-scenario-authoring-history/04-01-SUMMARY.md`
 
 ### File structure
 ```
@@ -203,18 +212,23 @@ C:/Projects/tester agent/
 │   ├── applications.ts  (Application service CRUD functions)
 │   ├── repositories.ts  (Repository service CRUD + PAT validation -- server only)
 │   ├── repository-utils.ts (Client-safe repo utilities: slugify, extractRepoName)
+│   ├── scenarios.ts     (Scenario service: CRUD + listAllRepositoriesGrouped)
 │   ├── actions/
 │   │   ├── applications.ts (Server Actions for app mutations)
-│   │   └── repositories.ts (Server Actions for repo mutations)
+│   │   ├── repositories.ts (Server Actions for repo mutations)
+│   │   └── scenarios.ts  (Server Action for scenario creation)
 │   ├── schemas/
 │   │   ├── application.ts  (Zod validation schema)
-│   │   └── repository.ts   (Zod repo schema with provider-specific refinements)
+│   │   ├── repository.ts   (Zod repo schema with provider-specific refinements)
+│   │   └── scenario.ts    (Zod scenario schema: inputText 10-5000, app/repo IDs)
 │   └── __tests__/
 │       ├── encryption.test.ts   (10 tests)
-│       └── applications.test.ts (17 tests)
+│       ├── applications.test.ts (17 tests)
+│       ├── repositories.test.ts (34 tests)
+│       └── scenarios.test.ts    (12 tests)
 ├── prisma/
-│   ├── schema.prisma    (Application model, prisma-client generator)
-│   └── migrations/      (initial migration: 20260305104120_init)
+│   ├── schema.prisma    (Application + Repository + Scenario models, prisma-client generator)
+│   └── migrations/      (3 migrations: init, add-repository, add-scenario-model)
 ├── public/
 ├── .env                 (local -- gitignored, DATABASE_URL with correct password)
 ├── .env.example         (committed template)

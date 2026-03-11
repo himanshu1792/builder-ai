@@ -25,9 +25,9 @@ No authentication for v1. Single-user, runs locally.
 
 ### Test Scenarios
 
-- [ ] **SCEN-01**: User can write a test scenario in plain English via text input
-- [ ] **SCEN-02**: User can view list of past scenarios with generation status (queued, in progress, completed, failed)
-- [ ] **SCEN-03**: User can view details of a past scenario (original input, refined prompt, generated script, error details)
+- [x] **SCEN-01**: User can write a test scenario in plain English via text input
+- [x] **SCEN-02**: User can view list of past scenarios with generation status (queued, in progress, completed, failed)
+- [x] **SCEN-03**: User can view details of a past scenario (original input, refined prompt, generated script, error details)
 
 ### AI Pipeline
 
@@ -104,9 +104,9 @@ Deferred to future release. Tracked but not in current roadmap.
 | REPO-03 | Phase 3 | Complete |
 | REPO-04 | Phase 3 | Complete |
 | REPO-05 | Phase 3 | Complete |
-| SCEN-01 | Phase 4 | Pending |
-| SCEN-02 | Phase 4 | Pending |
-| SCEN-03 | Phase 4 | Pending |
+| SCEN-01 | Phase 4 | Complete |
+| SCEN-02 | Phase 4 | Complete |
+| SCEN-03 | Phase 4 | Complete |
 | AI-01 | Phase 5 | Pending |
 | AI-02 | Phase 5 | Pending |
 | AI-03 | Phase 6 | Pending |

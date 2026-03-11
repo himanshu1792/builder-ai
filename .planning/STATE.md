@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-01)
 
 **Core value:** Users describe what to test in plain English and get a ready-to-merge PR with working Playwright scripts -- no manual test code writing required.
-**Current focus:** Phase 4: Scenario Authoring & History -- COMPLETE
+**Current focus:** Phase 5: Smoke Testing -- CONTEXT READY, awaiting planning
 
 ## Current Position
 
-Phase: 4 of 8 (Scenario Authoring & History) -- COMPLETE
-Plan: 2 of 2 in current phase (all plans complete)
-Status: Phase 4 complete, ready for Phase 5
-Last activity: 2026-03-11 -- Completed Plan 04-02 (Scenario UI: list, form, detail pages, TopNav update)
+Phase: 5 of 7 (Smoke Testing) -- context captured, not yet planned
+Plan: 0 of TBD in current phase
+Status: Roadmap restructured (8 phases → 7); Phase 5 CONTEXT.md written; ready to plan
+Last activity: 2026-03-11 -- Restructured roadmap, wrote Phase 5 context (Smoke Testing HITL screen)
 
-Progress: [##########] 100% (Phase 4)
+Progress: [░░░░░░░░░░] 0% (Phase 5)
 
 ## Performance Metrics
 

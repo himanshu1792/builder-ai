@@ -2,7 +2,7 @@
 
 ## Overview
 
-TestForge transforms plain-English test scenarios into ready-to-merge pull requests containing professional Playwright scripts. The roadmap progresses from project foundation through CRUD management of applications and repositories, into scenario authoring and AI-powered script generation, then async job processing, MCP-driven repository operations, and finally a programmatic API. Each phase delivers a complete, verifiable capability that builds toward the end-to-end pipeline: describe a test, get a PR.
+TestForge transforms plain-English test scenarios into ready-to-merge pull requests containing professional Playwright scripts. The roadmap builds from project foundation through application and repository management, then delivers two human-in-the-loop testing experiences (Smoke Testing and Regression Testing) and finally a programmatic API. Each phase delivers a complete, verifiable capability that builds toward the end-to-end pipeline: describe a test, watch AI agents generate it, get a PR.
 
 ## Phases
 
@@ -12,14 +12,13 @@ TestForge transforms plain-English test scenarios into ready-to-merge pull reque
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Project Foundation** - Next.js scaffold, database schema, encryption module, and local dev environment
-- [ ] **Phase 2: Application Management** - Register, view, edit, and delete applications with encrypted credentials
-- [ ] **Phase 3: Repository Management** - Connect GitHub and Azure DevOps repos with tokens and output folder configuration
-- [ ] **Phase 4: Scenario Authoring & History** - Write test scenarios in plain English and browse past generations
-- [ ] **Phase 5: AI Pipeline** - Refine scenarios into structured prompts and generate Playwright scripts via OpenAI
-- [ ] **Phase 6: Async Processing & Status** - Job queue for background generation with real-time status updates and error reporting
-- [ ] **Phase 7: MCP Repository Operations** - Create branches, push scripts, and open pull requests via GitHub MCP and ADO MCP
-- [ ] **Phase 8: Programmatic API** - REST endpoint for triggering test generation and polling job status externally
+- [x] **Phase 1: Project Foundation** - Next.js scaffold, database schema, encryption module, and local dev environment
+- [x] **Phase 2: Application Management** - Register, view, edit, and delete applications with encrypted credentials
+- [x] **Phase 3: Repository Management** - Connect GitHub and Azure DevOps repos with tokens and output folder configuration
+- [x] **Phase 4: Scenario Authoring & History** - Data layer and form components reused by Phase 5; Run History nav item
+- [ ] **Phase 5: Smoke Testing** - Human-in-the-loop agent pipeline: analyst, prompt builder (with approval), script generator (live Chromium), reviewer, PR creator
+- [ ] **Phase 6: Regression Testing** - Playwright built-in agents (Planner, Executor, Healer) with plan review before execution
+- [ ] **Phase 7: Programmatic API** - REST endpoint for triggering test generation and polling job status externally
 
 ## Phase Details
 
@@ -89,55 +88,44 @@ Plans:
 - [ ] 04-01-PLAN.md -- Scenario data layer: Prisma model (forward-compatible), service (TDD), Zod schema, server action with cross-entity validation
 - [ ] 04-02-PLAN.md -- Scenario UI: list page, authoring form with dependent app/repo dropdowns, detail page with multi-section layout, TopNav update
 
-### Phase 5: AI Pipeline
-**Goal**: The system can transform a plain-English scenario into a professional, runnable Playwright test script through a two-stage AI process
+### Phase 5: Smoke Testing
+**Goal**: Users submit a plain-English scenario, watch a human-in-the-loop AI agent pipeline generate a Playwright script and open a PR, with prompt approval at the midpoint
 **Depends on**: Phase 4
-**Requirements**: AI-01, AI-02
+**Requirements**: ST-01, ST-02, ST-03, ST-04, ST-05, AI-01, AI-02, AI-03, AI-04, OPS-01, OPS-02, OPS-03, OPS-04
 **Success Criteria** (what must be TRUE):
-  1. Given a plain-English scenario, the system produces a refined, structured testing prompt that expands vague instructions into explicit steps with assertions
-  2. Given a refined prompt, the system generates a syntactically valid Playwright JavaScript test file that uses modern Playwright APIs (locators, expect assertions, proper waits)
-  3. The generated script includes the target application's URL and uses credential variables (not hardcoded passwords) for authentication steps
-  4. The refinement and generation stages are observable as separate steps, with the refined prompt and generated script both stored and viewable
+  1. User fills in scenario text, application, and repository in the left panel and submits
+  2. Analyst agent asks clarifying questions in the right panel; user responds via text or buttons
+  3. Prompt Builder agent creates a structured prompt; user can accept or reject it with a reason; rejected prompts are regenerated
+  4. Script Generator agent generates a Playwright script using MCP; live embedded Chromium browser activity is shown in the right panel
+  5. Reviewer agent automatically reruns and fixes any script errors; the corrected result is shown
+  6. PR Creator agent creates a branch, pushes the script, opens a PR; the PR link is visible on screen
+  7. The full run (input, accepted prompt, script, PR link) is saved and accessible in Run History
+  8. The linear pipeline bar (Analyst → Prompt Builder → Script Generator → Reviewer → PR Creator) shows which agent is active at all times
 **Plans**: TBD
 
 Plans:
 - [ ] 05-01: TBD
 - [ ] 05-02: TBD
+- [ ] 05-03: TBD
 
-### Phase 6: Async Processing & Status
-**Goal**: Test generation runs asynchronously in the background with real-time progress visible to the user and clear error reporting on failure
+### Phase 6: Regression Testing
+**Goal**: Users submit a scenario, review a plain-English plan from the Planner agent, then watch Playwright's built-in Executor and Healer agents generate and stabilize the test script
 **Depends on**: Phase 5
-**Requirements**: AI-03, AI-04
+**Requirements**: RT-01, RT-02, RT-03, RT-04
 **Success Criteria** (what must be TRUE):
-  1. When a user submits a scenario, the UI returns immediately and shows the job as "queued" without blocking
-  2. As the job progresses through pipeline stages (refining, generating), the user sees real-time status updates in the UI without manually refreshing
-  3. When generation fails, the user sees an actionable error message indicating what went wrong (e.g., "OpenAI API rate limited -- try again in 60 seconds" or "Could not connect to application URL")
-  4. Multiple jobs can be queued and process sequentially without interfering with each other
+  1. Regression Testing screen shows three agent cards (Planner, Executor, Healer) and a scenario input
+  2. Planner generates a plain-English step-by-step plan, saves it to DB, and presents it for user review
+  3. On approval, Executor generates a Playwright test script using Playwright's built-in agent
+  4. Healer agent automatically detects and fixes script errors
 **Plans**: TBD
 
 Plans:
 - [ ] 06-01: TBD
 - [ ] 06-02: TBD
 
-### Phase 7: MCP Repository Operations
-**Goal**: The system can automatically push generated scripts to the user's repository and create a pull request for review, using MCP servers for all repo interactions
-**Depends on**: Phase 6
-**Requirements**: OPS-01, OPS-02, OPS-03, OPS-04
-**Success Criteria** (what must be TRUE):
-  1. After script generation completes, a new branch is automatically created in the connected repository (GitHub or ADO) with a descriptive name
-  2. The generated Playwright script file is pushed to the user-configured output folder on the new branch
-  3. A pull request is created with a title and description that reference the original test scenario
-  4. After the full pipeline completes, the user can see and click a direct link to the created pull request
-  5. MCP server connections are properly cleaned up after each job (no zombie processes or leaked connections)
-**Plans**: TBD
-
-Plans:
-- [ ] 07-01: TBD
-- [ ] 07-02: TBD
-
-### Phase 8: Programmatic API
+### Phase 7: Programmatic API
 **Goal**: External tools and scripts can trigger test generation and check results without using the web UI
-**Depends on**: Phase 7
+**Depends on**: Phase 6
 **Requirements**: API-01, API-02, API-03
 **Success Criteria** (what must be TRUE):
   1. A POST request to `/api/generate/:applicationId/:repoId` with a scenario in the request body triggers a test generation job
@@ -146,20 +134,19 @@ Plans:
 **Plans**: TBD
 
 Plans:
-- [ ] 08-01: TBD
+- [ ] 07-01: TBD
 
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 --> 2 --> 3 --> 4 --> 5 --> 6 --> 7 --> 8
+Phases execute in numeric order: 1 --> 2 --> 3 --> 4 --> 5 --> 6 --> 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Project Foundation | 4/4 | Complete | 2026-03-05 |
 | 2. Application Management | 4/4 | Complete | 2026-03-08 |
 | 3. Repository Management | 3/3 | Complete | 2026-03-09 |
-| 4. Scenario Authoring & History | 0/2 | Not started | - |
-| 5. AI Pipeline | 0/2 | Not started | - |
-| 6. Async Processing & Status | 0/2 | Not started | - |
-| 7. MCP Repository Operations | 0/2 | Not started | - |
-| 8. Programmatic API | 0/1 | Not started | - |
+| 4. Scenario Authoring & History | 2/2 | Complete | 2026-03-11 |
+| 5. Smoke Testing | 0/3 | Not started | - |
+| 6. Regression Testing | 0/2 | Not started | - |
+| 7. Programmatic API | 0/1 | Not started | - |

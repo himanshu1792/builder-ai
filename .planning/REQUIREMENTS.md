@@ -23,31 +23,57 @@ No authentication for v1. Single-user, runs locally.
 - [x] **REPO-04**: User can view list of connected repos for an application
 - [x] **REPO-05**: User can remove a connected repo
 
-### Test Scenarios
+### Test Run History
 
-- [x] **SCEN-01**: User can write a test scenario in plain English via text input
-- [x] **SCEN-02**: User can view list of past scenarios with generation status (queued, in progress, completed, failed)
-- [x] **SCEN-03**: User can view details of a past scenario (original input, refined prompt, generated script, error details)
+> The /scenarios page is removed from nav. Run History replaces it as the last nav item,
+> surfacing completed runs (input text, prompt, generated script, PR link) date-ordered.
+> The underlying Scenario DB model is reused.
 
-### AI Pipeline
+- [x] **SCEN-01**: User can write a test scenario in plain English via text input *(form reused inside Smoke Testing screen)*
+- [x] **SCEN-02**: User can view list of past runs with generation status *(Run History nav item)*
+- [x] **SCEN-03**: User can view details of a past run (original input, refined prompt, generated script, PR link) *(Run History detail)*
 
-- [ ] **AI-01**: System refines plain-English scenario into a structured, professional testing prompt using OpenAI GPT
-- [ ] **AI-02**: System generates a valid, runnable Playwright JavaScript test script from the refined prompt
-- [ ] **AI-03**: Generation runs asynchronously via job queue — user sees real-time status updates
-- [ ] **AI-04**: Failed generations show actionable error messages
+### Smoke Testing Screen
 
-### Repository Operations (MCP)
+> Replaces old "AI Pipeline" + "Async Processing" + "MCP Repository Operations" phases.
+> All AI and MCP work happens within a single integrated, human-in-the-loop screen.
 
-- [ ] **OPS-01**: System creates a new branch in the connected repo via GitHub MCP or ADO MCP
-- [ ] **OPS-02**: System pushes generated script to the user-configured output folder on the new branch
-- [ ] **OPS-03**: System creates a pull request with descriptive title and scenario context
-- [ ] **OPS-04**: User can see the PR link after successful generation
+**Layout:**
+- [ ] **ST-01**: Smoke Testing screen has a left panel (max 1/3 width) for scenario input (text, application, repository) and a right panel (2/3 width) for agent interaction
+- [ ] **ST-02**: A linear pipeline bar is shown below both panels indicating which agent is active: `Analyst → Prompt Builder → Script Generator → Reviewer → PR Creator`
 
-### API
+**Human-in-the-Loop:**
+- [ ] **ST-03**: Analyst agent processes the submitted scenario and can ask the user clarifying questions in the right panel; the agent chooses between free-text input or clickable choice buttons depending on the question
+- [ ] **ST-04**: Prompt Builder agent creates a structured test prompt and presents it to the user for approval; user can accept or reject; if rejected, user must provide a reason; system regenerates the prompt incorporating the feedback
+- [ ] **ST-05**: When the user accepts the prompt it is passed to the Script Generator agent; the right panel shows a live embedded Chromium browser view of what the agent is doing during script generation
+
+**Automation:**
+- [ ] **AI-01**: System refines plain-English scenario into a structured, professional testing prompt (Prompt Builder agent)
+- [ ] **AI-02**: System generates a valid, runnable Playwright JavaScript test script from the approved prompt (Script Generator agent via MCP)
+- [ ] **AI-03**: Agent pipeline status is visible in real time on the Smoke Testing screen — no polling, no page refresh
+- [ ] **AI-04**: Reviewer agent automatically reruns the generated script, fixes errors, and shows the final corrected result to the user
+- [ ] **OPS-01**: PR Creator agent creates a new branch in the connected repo via GitHub MCP or ADO MCP
+- [ ] **OPS-02**: PR Creator agent pushes the generated script to the user-configured output folder on the new branch
+- [ ] **OPS-03**: PR Creator agent opens a pull request with a descriptive title referencing the original scenario
+- [ ] **OPS-04**: PR link is displayed on screen after the pipeline completes; the full run (input text, accepted prompt, generated script, PR link) is saved to the database
+
+### Regression Testing Screen
+
+> Uses Playwright's built-in AI agents (see https://playwright.dev/docs/test-agents).
+> Three agents are always visible on the screen: Planner, Executor, Healer.
+
+- [ ] **RT-01**: Regression Testing screen has a scenario input box; submitting triggers the Planner agent
+- [ ] **RT-02**: Planner agent generates a plain-English step-by-step test plan; plan is saved in DB and presented to the user in a viewer for review before execution
+- [ ] **RT-03**: On plan approval, Executor agent generates a Playwright test script
+- [ ] **RT-04**: Healer agent monitors for script errors and automatically fixes them
+
+### Programmatic API
 
 - [ ] **API-01**: System exposes a POST endpoint (`/api/generate/:applicationId/:repoId`) to trigger test generation with scenario in payload
 - [ ] **API-02**: API returns generation job ID immediately, with a status endpoint to poll for completion
 - [ ] **API-03**: Status endpoint returns generation status and PR link when complete
+
+---
 
 ## v2 Requirements
 
@@ -84,10 +110,9 @@ Deferred to future release. Tracked but not in current roadmap.
 | CI/CD pipeline integration | Users handle merge and pipeline triggers |
 | Visual test recording | Contradicts natural language value proposition; produces brittle tests |
 | Cross-browser test variants | Playwright handles this via config, not different script code |
-| AI chat interface | Structured input beats open-ended chat for test scenario writing |
 | Mobile native app testing | Different toolchain entirely; web-only for v1 |
 | Self-hosted deployment | SaaS-only; no self-hosted support |
-| Custom AI model selection | Optimize prompts for one model (OpenAI GPT) |
+| Custom AI model selection | Optimize prompts for one model |
 | Cloud deployment (v1) | v1 runs locally on developer machine |
 
 ## Traceability
@@ -107,23 +132,32 @@ Deferred to future release. Tracked but not in current roadmap.
 | SCEN-01 | Phase 4 | Complete |
 | SCEN-02 | Phase 4 | Complete |
 | SCEN-03 | Phase 4 | Complete |
+| ST-01 | Phase 5 | Pending |
+| ST-02 | Phase 5 | Pending |
+| ST-03 | Phase 5 | Pending |
+| ST-04 | Phase 5 | Pending |
+| ST-05 | Phase 5 | Pending |
 | AI-01 | Phase 5 | Pending |
 | AI-02 | Phase 5 | Pending |
-| AI-03 | Phase 6 | Pending |
-| AI-04 | Phase 6 | Pending |
-| OPS-01 | Phase 7 | Pending |
-| OPS-02 | Phase 7 | Pending |
-| OPS-03 | Phase 7 | Pending |
-| OPS-04 | Phase 7 | Pending |
-| API-01 | Phase 8 | Pending |
-| API-02 | Phase 8 | Pending |
-| API-03 | Phase 8 | Pending |
+| AI-03 | Phase 5 | Pending |
+| AI-04 | Phase 5 | Pending |
+| OPS-01 | Phase 5 | Pending |
+| OPS-02 | Phase 5 | Pending |
+| OPS-03 | Phase 5 | Pending |
+| OPS-04 | Phase 5 | Pending |
+| RT-01 | Phase 6 | Pending |
+| RT-02 | Phase 6 | Pending |
+| RT-03 | Phase 6 | Pending |
+| RT-04 | Phase 6 | Pending |
+| API-01 | Phase 7 | Pending |
+| API-02 | Phase 7 | Pending |
+| API-03 | Phase 7 | Pending |
 
 **Coverage:**
-- v1 requirements: 24 total
-- Mapped to phases: 24
+- v1 requirements: 32 total
+- Mapped to phases: 32
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-01*
-*Last updated: 2026-03-01 after roadmap creation*
+*Last updated: 2026-03-11 — restructured phases 5-7; added ST-*, RT-* requirements; removed standalone AI Pipeline / Async / MCP phases*

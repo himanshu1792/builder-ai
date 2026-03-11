@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-01)
 
 **Core value:** Users describe what to test in plain English and get a ready-to-merge PR with working Playwright scripts -- no manual test code writing required.
-**Current focus:** Phase 3: Repository Management -- COMPLETE
+**Current focus:** Phase 4: Scenario Authoring & History -- PLANNED
 
 ## Current Position
 
-Phase: 3 of 8 (Repository Management)
-Plan: 3 of 3 in current phase
-Status: Phase Complete
-Last activity: 2026-03-09 -- Completed Plan 03 (Repository Connection UI)
+Phase: 4 of 8 (Scenario Authoring & History)
+Plan: 0 of 2 in current phase
+Status: Plans Created, Ready for Execution
+Last activity: 2026-03-09 -- Created Phase 4 plans (2 plans across 2 waves)
 
-Progress: [██████████] 100% (Phase 3)
+Progress: [░░░░░░░░░░] 0% (Phase 4)
 
 ## Performance Metrics
 
@@ -120,9 +120,9 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-03-09
-Stopped at: Completed 03-03-PLAN.md (Repository Connection UI) -- Phase 3 complete
-Resume command: `/gsd:plan-phase 4` (plan Phase 4: Scenario Authoring & History)
-Resume file: N/A -- Phase 4 plans not yet created
+Stopped at: Phase 4 plans created (2 plans across 2 waves)
+Resume command: `/gsd:execute-phase 4` (execute Phase 4: Scenario Authoring & History)
+Resume file: .planning/phases/04-scenario-authoring-history/04-01-PLAN.md
 
 ## Resume Memory (for new session)
 
@@ -139,9 +139,9 @@ Resume file: N/A -- Phase 4 plans not yet created
   - **PLAN-03: COMPLETE** -- Repository connection UI: ConnectRepoModal with GitHub/ADO toggle, RepositoryList, inline editing, delete dialog; client/server utility separation
 
 ### What to do next
-1. Plan Phase 4 (Scenario Authoring & History) -- create phase plans
-2. Phase 4 builds on the application + repository foundation for test scenario submission
-3. Scenario UI will likely integrate with application detail page or have its own route
+1. Execute Phase 4 (Scenario Authoring & History) -- `/gsd:execute-phase 4`
+2. Wave 1: Plan 04-01 builds Scenario data layer (Prisma model, service TDD, Zod schema, server action)
+3. Wave 2: Plan 04-02 builds Scenario UI (/scenarios list, /scenarios/new form, /scenarios/[id] detail, TopNav update)
 
 ### Key context for executors
 - **NO DOCKER** -- PostgreSQL runs locally on the machine (PostgreSQL 18 confirmed)

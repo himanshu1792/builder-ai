@@ -83,11 +83,11 @@ Plans:
   1. User can write a test scenario in a text input, select an application and repository, and submit it
   2. User can view a list of past scenarios showing the original input text and current generation status (queued, in progress, completed, failed)
   3. User can click into a past scenario and see full details: original input, refined prompt (once generated), generated script (once complete), and error details (if failed)
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 04-01: TBD
-- [ ] 04-02: TBD
+- [ ] 04-01-PLAN.md -- Scenario data layer: Prisma model (forward-compatible), service (TDD), Zod schema, server action with cross-entity validation
+- [ ] 04-02-PLAN.md -- Scenario UI: list page, authoring form with dependent app/repo dropdowns, detail page with multi-section layout, TopNav update
 
 ### Phase 5: AI Pipeline
 **Goal**: The system can transform a plain-English scenario into a professional, runnable Playwright test script through a two-stage AI process

@@ -2,11 +2,11 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: unknown
-last_updated: "2026-03-11T18:21:25.766Z"
+status: in_progress
+last_updated: "2026-03-13T11:00:00.000Z"
 progress:
-  total_phases: 4
-  completed_phases: 4
+  total_phases: 7
+  completed_phases: 5
   total_plans: 13
   completed_plans: 13
 ---
@@ -18,23 +18,24 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-01)
 
 **Core value:** Users describe what to test in plain English and get a ready-to-merge PR with working Playwright scripts -- no manual test code writing required.
-**Current focus:** Phase 5: Smoke Testing -- CONTEXT READY, awaiting planning
+**Current focus:** Phase 5 AI integration COMPLETE. Ready for end-to-end testing or Phase 6.
 
 ## Current Position
 
-Phase: 5 of 7 (Smoke Testing) -- context captured, not yet planned
-Plan: 0 of TBD in current phase
-Status: Roadmap restructured (8 phases → 7); Phase 5 CONTEXT.md written; ready to plan
-Last activity: 2026-03-11 -- Restructured roadmap, wrote Phase 5 context (Smoke Testing HITL screen)
+Phase: 5 of 7 (Smoke Testing) -- FULLY COMPLETE (UI + AI integration)
+Plan: `.claude/plans/fizzy-dazzling-moonbeam.md` (8/8 tasks done)
+Status: All 5 agents wired with real AI, Playwright MCP, and GitHub/ADO APIs
+Last activity: 2026-03-13 -- Completed all Phase 5 AI integration tasks
 
-Progress: [░░░░░░░░░░] 0% (Phase 5)
+Progress: [██████████] 100% (Phase 5 complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 13
-- Average duration: 7 min
-- Total execution time: 1.7 hours
+- Total plans completed: 13 (Phases 1-4)
+- Phase 5: Built directly (UI ~45 min, AI integration ~30 min)
+- Average duration: 7 min per plan
+- Total execution time: ~3.5 hours
 
 **By Phase:**
 
@@ -44,23 +45,7 @@ Progress: [░░░░░░░░░░] 0% (Phase 5)
 | 2 - Application Management | 4/4 | 33 min | 8 min |
 | 3 - Repository Management | 3/3 | 20 min | 7 min |
 | 4 - Scenario Authoring | 2/2 | 9 min | 5 min |
-
-**Recent Trend:**
-- Last 5 plans: 4m, 5m, 11m, 4m, 5m
-- Trend: stable
-
-*Updated after each plan completion*
-| Phase 01 P02 | 7min | 2 tasks | 6 files |
-| Phase 01 P04 | 11min | 2 tasks | 5 files |
-| Phase 02 P02 | 2min | 2 tasks | 3 files |
-| Phase 02 P01 | 4min | 3 tasks | 7 files |
-| Phase 02 P03 | 21min | 3 tasks | 7 files |
-| Phase 02 P04 | 8min | 3 tasks | 3 files |
-| Phase 03 P01 | 4min | 3 tasks | 6 files |
-| Phase 03 P02 | 5min | 2 tasks | 5 files |
-| Phase 03 P03 | 11min | 3 tasks | 7 files |
-| Phase 04 P01 | 4min | 3 tasks | 6 files |
-| Phase 04 P02 | 5min | 3 tasks | 8 files |
+| 5 - Smoke Testing | direct | ~75 min | N/A |
 
 ## Accumulated Context
 
@@ -69,194 +54,135 @@ Progress: [░░░░░░░░░░] 0% (Phase 5)
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
-- No authentication for v1 -- single user, runs locally
-- MCP servers chosen over direct REST APIs for repo operations (GitHub MCP, ADO MCP)
-- v1 runs locally on developer machine -- no cloud deployment
-- BullMQ + Redis for job queue (or pg-boss as PostgreSQL-only alternative)
-- AES-256-GCM encryption for credentials at rest
-- No Docker -- using local PostgreSQL installation (Phase 1, Plan 01)
-- ESM-first: package.json type:module for Prisma 7 compatibility (Phase 1, Plan 01)
-- Turbopack enabled for dev server (Phase 1, Plan 01)
-- Node.js built-in crypto module for AES-256-GCM, no npm packages (Phase 1, Plan 03)
-- Vitest as test framework -- Vite-native, ESM-first (Phase 1, Plan 03)
-- Encryption output format: iv_hex:tag_hex:ciphertext_hex with colon separators (Phase 1, Plan 03)
-- [Phase 01]: Fixed DATABASE_URL password from postgres to admin for local PostgreSQL 18
-- [Phase 01]: Prisma 7 with PrismaPg adapter, prisma-client generator, custom output to generated/prisma/
-- [Phase 01]: Prebuild script (prisma generate) ensures generated client before next build (Phase 1, Plan 04)
-- [Phase 01]: ESLint globalIgnores includes generated/** for Prisma generated client (Phase 1, Plan 04)
-- [Phase 02]: Tailwind CSS 4 @theme with 15 semantic color tokens for purple/blue theme (Phase 2, Plan 02)
-- [Phase 02]: SVG shield-with-checkmark icon for TestForge branding (Phase 2, Plan 02)
-- [Phase 02]: Coming Soon items use inline "Soon" badge (not tooltip) for immediate visibility (Phase 2, Plan 02)
-- [Phase 02]: Zod v4 with { error: '...' } syntax for custom validation messages (Phase 2, Plan 01)
-- [Phase 02]: Service layer pattern: Server Actions always go through lib/applications.ts, never call Prisma directly (Phase 2, Plan 01)
-- [Phase 02]: vitest-mock-extended 3.1.0 confirmed compatible with Vitest 4.0.18 (Phase 2, Plan 01)
-- [Phase 02]: Client wrapper pattern: Server Component page fetches data, Client Component wrapper manages modal/dialog state (Phase 2, Plan 03)
-- [Phase 02]: getApplicationAction server action for fetching decrypted credentials on edit pre-fill (Phase 2, Plan 03)
-- [Phase 02]: useActionState with bind for parameterized server actions in edit modal (Phase 2, Plan 03)
-- [Phase 02]: Server Component dashboard -- fetches listApplications() server-side, no client data fetching (Phase 2, Plan 04)
-- [Phase 02]: CSS-only animations for AgentShowcase -- lightweight, no JS animation library (Phase 2, Plan 04)
-- [Phase 02]: Dashboard section pattern: rounded-xl border card with header row and content area (Phase 2, Plan 04)
-- [Phase 03]: Native fetch for PAT validation -- no Octokit/azure-devops-node-api dependency (Phase 3, Plan 01)
-- [Phase 03]: Fine-grained GitHub PATs treated as valid on 200 response (no X-OAuth-Scopes header) (Phase 3, Plan 01)
-- [Phase 03]: Both ADO URL formats supported: dev.azure.com and visualstudio.com (Phase 3, Plan 01)
-- [Phase 03]: Zod refinements for provider-specific URL patterns and conditional ADO organization requirement (Phase 3, Plan 01)
-- [Phase 03]: Detail page pattern: Server Component fetches data, AppDetailClient manages edit/delete/repo state (Phase 3, Plan 02)
-- [Phase 03]: Inline editing via useActionState with bind(null, id) -- same pattern as edit modal but embedded in page (Phase 3, Plan 02)
-- [Phase 03]: ApplicationCard converted from div to Link component, removing all edit/delete actions from list page (Phase 3, Plan 02)
-- [Phase 03]: Delete dialog on detail page includes repository count warning for connected repos (Phase 3, Plan 02)
-- [Phase 03]: Client/server boundary separation: lib/repository-utils.ts for client-safe utilities, lib/repositories.ts for server-only code (Phase 3, Plan 03)
-- [Phase 03]: Provider toggle uses segmented control with hidden input for form submission (Phase 3, Plan 03)
-- [Phase 03]: Hover-reveal row actions: group + group-hover:opacity-100 pattern for edit/delete buttons on list rows (Phase 3, Plan 03)
-- [Phase 03]: Inline row editing: isEditing state delegates from display component to edit component (Phase 3, Plan 03)
-- [Phase 03]: Delete repo dialog uses "Disconnect" terminology to clarify the repository itself is unaffected (Phase 3, Plan 03)
-- [Phase 04]: Forward-compatible nullable fields (refinedPrompt, generatedScript, errorMessage) avoid breaking migrations in Phase 5/6 (Phase 4, Plan 01)
-- [Phase 04]: listAllRepositoriesGrouped groups repos by applicationId for dependent dropdown in scenario creation form (Phase 4, Plan 01)
-- [Phase 04]: Server action validates app existence, repo existence, AND repo-app ownership before creating scenario (Phase 4, Plan 01)
-- [Phase 04]: Dependent dropdown uses key prop reset: changing app resets repo select by changing its React key (Phase 4, Plan 02)
-- [Phase 04]: ScenarioList is a Server Component (no "use client") using Link for navigation (Phase 4, Plan 02)
-- [Phase 04]: StatusBadge is pure render component with fallback to queued config for unknown statuses (Phase 4, Plan 02)
-- [Phase 04]: Relative time formatter is inline utility -- no external date library needed (Phase 4, Plan 02)
+- [Phase 05]: Vercel AI SDK (`ai` + `@ai-sdk/azure`) chosen over LangGraph -- pipeline is linear, LangGraph is overkill
+- [Phase 05]: Azure OpenAI supported via `@ai-sdk/azure` provider package
+- [Phase 05]: SSE (Server-Sent Events) for real-time pipeline updates, not WebSockets
+- [Phase 05]: In-memory pending interactions with Promise-based resolution for human-in-the-loop
+- [Phase 05]: Pipeline orchestrator pattern: each agent is a function receiving PipelineContext
+- [Phase 05 AI]: Playwright MCP (`@playwright/mcp`) for browser automation, persistent singleton client
+- [Phase 05 AI]: `@ai-sdk/mcp` bridges Playwright MCP tools into Vercel AI SDK `generateText()`
+- [Phase 05 AI]: Two-phase script generation: AI explores browser → then converts action log to Playwright script
+- [Phase 05 AI]: Reviewer runs generated script via `npx playwright test` in headless mode, AI auto-fixes up to 3x
+- [Phase 05 AI]: PR creation via raw REST APIs (GitHub + Azure DevOps), no Octokit dependency
+- [Phase 05 AI]: AI SDK v6 uses `stopWhen: stepCountIs(N)` instead of `maxSteps`, tool calls use `input`/`output`
 
-### Pending Todos
+### Completed (Phase 5 AI Integration)
 
-- ~~**[Phase 3]** User wants repo connection (GitHub/ADO PAT + repo selector) tied to applications in the UX.~~ RESOLVED: Repos connected from application detail page with ConnectRepoModal.
-- ~~**[Phase 4]** Test scenario authoring UI needs to integrate with application and repository selection.~~ RESOLVED: Scenario form at /scenarios/new with dependent app/repo dropdowns.
+- **[DONE]** Task 1: PipelineContext expanded with credentials (applicationUsername/Password, repositoryPat/Organization)
+- **[DONE]** Task 2: Analyst agent — real AI with `generateText()` + JSON question output
+- **[DONE]** Task 3: Prompt Builder — AI-generated structured test prompts with rejection feedback loop
+- **[DONE]** Task 4: Persistent Playwright MCP client singleton (`mcp-client.ts`)
+- **[DONE]** Task 5: Script Generator — Playwright MCP browser exploration + AI script generation
+- **[DONE]** Task 6: Reviewer — headless `npx playwright test` execution + AI auto-fix (max 3 retries)
+- **[DONE]** Task 7: Git provider wrappers — GitHub REST API + Azure DevOps REST API
+- **[DONE]** Task 8: PR Creator — real branch/commit/PR via git-providers
 
 ### Blockers/Concerns
 
-- MCP server maturity for GitHub and ADO is uncertain (LOW confidence from research). May need fallback to Octokit/azure-devops-node-api with MCP-compatible wrapper.
-- Playwright MCP server API surface needs verification during Phase 5/7 implementation.
+- End-to-end testing requires valid AI credentials in `.env` (OPENAI_API_KEY or Azure OpenAI)
+- First run will be slow as Playwright MCP spawns browser process (subsequent runs reuse singleton)
+- Reviewer depends on `@playwright/test` being available in PATH for `npx playwright test`
 
 ## Session Continuity
 
-Last session: 2026-03-11
-Stopped at: Completed 04-02-PLAN.md (Scenario UI)
-Resume command: `/gsd:execute-phase 5` (start Phase 5: AI Pipeline)
-Resume file: .planning/phases/05-ai-pipeline/ (next phase)
+Last session: 2026-03-13
+Stopped at: Phase 5 AI integration complete, all 8 tasks done, TypeScript compiles clean
+Resume command: `/gsd:progress` or start Phase 6 (Regression Testing)
+Resume file: `.planning/phases/06-regression-testing/`
 
 ## Resume Memory (for new session)
 
 ### What was done
-- **Phase 1: COMPLETE** (4 plans, 3 waves, all done)
-- **Phase 2: COMPLETE** (4 plans, 2 waves, all done)
-  - **PLAN-01: COMPLETE** -- Application service with Zod schema (TDD)
-  - **PLAN-02: COMPLETE** -- TopNav component, purple/blue theme, navigation shell
-  - **PLAN-03: COMPLETE** -- Application CRUD UI: list page, create/edit modal, delete dialog
-  - **PLAN-04: COMPLETE** -- Dashboard page with stats, app overview, Meet Your Agents
-- **Phase 3: COMPLETE** (3/3 plans done)
-  - **PLAN-01: COMPLETE** -- Repository data layer (TDD): Prisma model, service CRUD, PAT validation, URL parsing, Zod schema, server actions
-  - **PLAN-02: COMPLETE** -- Application detail page with inline editing, delete, Connected Repositories placeholder; ApplicationCard refactored to clickable link
-  - **PLAN-03: COMPLETE** -- Repository connection UI: ConnectRepoModal with GitHub/ADO toggle, RepositoryList, inline editing, delete dialog; client/server utility separation
-- **Phase 4: COMPLETE** (2/2 plans done)
-  - **PLAN-01: COMPLETE** -- Scenario data layer (TDD): Prisma Scenario model, service CRUD + listAllRepositoriesGrouped, Zod schema, server action with cross-entity validation
-  - **PLAN-02: COMPLETE** -- Scenario UI: /scenarios list page with StatusBadge, /scenarios/new form with dependent app/repo dropdowns, /scenarios/[id] detail with multi-section layout, TopNav updated
+- **Phase 1: COMPLETE** (4 plans)
+- **Phase 2: COMPLETE** (4 plans)
+- **Phase 3: COMPLETE** (3 plans)
+- **Phase 4: COMPLETE** (2 plans)
+- **Phase 5: COMPLETE** (UI + AI integration)
+  - Smoke Testing split-panel page with left form + right agent chat
+  - Agent Pipeline Bar (5 steps: Analyst → Prompt Builder → Script Generator → Reviewer → PR Creator)
+  - Agent Chat Panel with streaming messages, Q&A (text + choice buttons), prompt approval/rejection
+  - Run History list + detail pages
+  - SSE streaming API for real-time pipeline events
+  - User interaction API for Q&A answers and prompt approval
+  - **Analyst**: AI analyzes scenario, generates clarifying questions (text or choice)
+  - **Prompt Builder**: AI generates structured test prompt, approval/rejection loop with feedback
+  - **Script Generator**: Playwright MCP drives live Chromium, AI explores app, generates Playwright test script
+  - **Reviewer**: Runs script headless via `npx playwright test`, AI auto-fixes errors (up to 3 retries)
+  - **PR Creator**: GitHub REST API + Azure DevOps REST API, creates branch/commit/PR with PAT
+  - Persistent Playwright MCP singleton (`mcp-client.ts`)
+  - Git provider wrappers (`git-providers.ts`) for both GitHub and ADO
+  - DB: prUrl, currentAgent fields on Scenario model
 
 ### What to do next
-1. Start Phase 5 (AI Pipeline) -- `/gsd:execute-phase 5`
-2. Phase 5 will populate refinedPrompt and generatedScript fields that Phase 4 UI already handles with placeholders
+1. **Test end-to-end**: Configure `.env` with AI credentials, register an app, connect a repo, run a smoke test
+2. **Phase 6**: Regression Testing — Planner, Executor, Healer agents with plan review
+3. **Phase 7**: Programmatic API
 
 ### Key context for executors
-- **NO DOCKER** -- PostgreSQL runs locally on the machine (PostgreSQL 18 confirmed)
-- **ESM-first** -- `"type": "module"` in package.json for Prisma 7
-- **Turbopack** -- dev server uses `--turbopack` flag
+- **NO DOCKER** -- PostgreSQL runs locally
+- **ESM-first** -- `"type": "module"` in package.json
 - Next.js 16.1.6, React 19, TypeScript strict, Tailwind CSS 4, ESLint 9 flat config
-- Prisma 7.4 requires: `@prisma/adapter-pg`, `prisma.config.ts`, custom output path, `prisma-client` generator
-- `prebuild` script runs `prisma generate` before `next build`
-- Vitest for testing (73 tests passing: 10 encryption + 17 application + 34 repository + 12 scenario)
-- **TopNav** with TestForge logo, Dashboard/Applications/Scenarios links, Coming Soon items
-- **Theme** via Tailwind @theme: bg-primary, text-primary, bg-nav-hover, etc.
-- **Dashboard** at `/` with stats cards, recent apps, placeholder sections, agent showcase
-- **Applications page** at `/applications` with card list (clickable links), create-only modal
-- **Application detail page** at `/applications/[id]` with inline editing, delete, full repository management
-- **Modal pattern**: Server Component page + Client wrapper for interactive state
-- **Detail page pattern**: Server Component fetch + AppDetailClient wrapper for editing/delete/repo state
-- **Components directory** established at app/components/ (TopNav, DashboardStats, AgentShowcase)
-- **Application components** at app/applications/components/ (ApplicationCard, ApplicationsClient, ApplicationModal, DeleteDialog, PasswordField)
-- **Repository components** at app/applications/[id]/components/ (ConnectRepoModal, RepositoryList, RepositoryRow, EditRepoRow, DeleteRepoDialog)
-- **Client/server boundary**: lib/repository-utils.ts for client components, lib/repositories.ts for server-only
-- **Scenario service** at lib/scenarios.ts with createScenario, listScenarios, getScenario, listAllRepositoriesGrouped
-- **Scenario schema** at lib/schemas/scenario.ts with inputText (10-5000), applicationId, repositoryId validation
-- **Scenario action** at lib/actions/scenarios.ts with cross-entity validation (app exists, repo exists, repo belongs to app)
-- **Scenario pages** at app/scenarios/ with list, new form (dependent dropdowns), and [id] detail (multi-section layout)
-- **Scenario components** at app/scenarios/components/ (ScenarioList, ScenarioForm, StatusBadge)
-- **Scenario detail components** at app/scenarios/[id]/components/ (ScenarioDetailClient)
-- Plans are at: `.planning/phases/04-scenario-authoring-history/04-01-PLAN.md` through `04-02-PLAN.md`
-- Summaries at: `.planning/phases/04-scenario-authoring-history/04-01-SUMMARY.md` through `04-02-SUMMARY.md`
+- Prisma 7.4 with PrismaPg adapter, custom output to generated/prisma/
+- Vitest for testing (73 tests passing)
+- **AI Stack:** Vercel AI SDK v6 (`ai` + `@ai-sdk/azure` + `@ai-sdk/openai` + `@ai-sdk/mcp`)
+- **Browser Automation:** Playwright MCP persistent singleton, Chromium headless
+- **SSE Architecture:** `/api/runs/[id]/stream` for events, `/api/runs/[id]/respond` for interactions
+- **Agent Pattern:** Each agent is async function receiving PipelineContext, emitting SSE events
+- **AI SDK v6 API:** `stopWhen: stepCountIs(N)` (not maxSteps), tool calls use `input`/`output` (not args/result)
 
 ### File structure
 ```
 C:/Projects/tester agent/
-├── .planning/           (project planning docs)
-├── app/                 (Next.js App Router pages)
-│   ├── layout.tsx       (Root layout with TopNav + main wrapper)
-│   ├── page.tsx         (Dashboard command center)
-│   ├── globals.css      (Tailwind + @theme purple/blue tokens)
+├── .planning/
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx              (Dashboard)
+│   ├── globals.css
 │   ├── components/
-│   │   ├── TopNav.tsx       (Navigation bar with active states)
-│   │   ├── DashboardStats.tsx (Stats card grid)
-│   │   └── AgentShowcase.tsx  (Animated agent cards)
-│   ├── applications/
-│   │   ├── page.tsx     (Server Component: app list page)
-│   │   ├── [id]/
-│   │   │   ├── page.tsx              (Server Component: app detail page)
-│   │   │   └── components/
-│   │   │       ├── AppDetailClient.tsx  (Client wrapper: edit/delete/repo state)
-│   │   │       ├── AppDetailHeader.tsx  (Inline view/edit mode with form)
-│   │   │       ├── ConnectRepoModal.tsx (GitHub/ADO toggle + form modal)
-│   │   │       ├── RepositoryList.tsx   (Repo list with empty state + count badge)
-│   │   │       ├── RepositoryRow.tsx    (Provider icon, name, folder, hover actions)
-│   │   │       ├── EditRepoRow.tsx      (Inline output folder editing)
-│   │   │       └── DeleteRepoDialog.tsx (Disconnect confirmation dialog)
+│   │   ├── TopNav.tsx
+│   │   ├── DashboardStats.tsx
+│   │   └── AgentShowcase.tsx
+│   ├── applications/         (Phase 2-3: CRUD + repo management)
+│   ├── scenarios/            (Phase 4)
+│   ├── smoke-testing/        (Phase 5)
+│   │   ├── page.tsx
 │   │   └── components/
-│   │       ├── ApplicationsClient.tsx  (Client wrapper for create modal)
-│   │       ├── ApplicationCard.tsx     (Clickable link card to detail page)
-│   │       ├── ApplicationModal.tsx    (Create/edit form modal)
-│   │       ├── PasswordField.tsx       (Password input with eye toggle)
-│   │       └── DeleteDialog.tsx        (Delete confirmation dialog)
-│   └── scenarios/
-│       ├── page.tsx     (Server Component: scenario list page)
-│       ├── new/
-│       │   └── page.tsx             (Server Component: new scenario form)
-│       ├── [id]/
-│       │   ├── page.tsx             (Server Component: scenario detail page)
-│       │   └── components/
-│       │       └── ScenarioDetailClient.tsx (Client: multi-section detail layout)
-│       └── components/
-│           ├── ScenarioList.tsx      (Scenario card list with empty state)
-│           ├── ScenarioForm.tsx      (Client: textarea, dependent dropdowns)
-│           └── StatusBadge.tsx       (Color-coded status badge)
-├── generated/
-│   └── prisma/          (Prisma generated client -- gitignored)
+│   │       ├── SmokeTestClient.tsx
+│   │       ├── SmokeTestForm.tsx
+│   │       ├── AgentChatPanel.tsx
+│   │       └── AgentPipelineBar.tsx
+│   ├── run-history/          (Phase 5)
+│   │   ├── page.tsx
+│   │   └── [id]/
+│   │       ├── page.tsx
+│   │       └── components/RunDetailClient.tsx
+│   └── api/runs/
+│       ├── route.ts
+│       └── [id]/
+│           ├── stream/route.ts
+│           └── respond/route.ts
 ├── lib/
-│   ├── prisma.ts        (Prisma Client singleton with PrismaPg adapter)
-│   ├── encryption.ts    (AES-256-GCM encrypt/decrypt)
-│   ├── applications.ts  (Application service CRUD functions)
-│   ├── repositories.ts  (Repository service CRUD + PAT validation -- server only)
-│   ├── repository-utils.ts (Client-safe repo utilities: slugify, extractRepoName)
-│   ├── scenarios.ts     (Scenario service: CRUD + listAllRepositoriesGrouped)
+│   ├── prisma.ts
+│   ├── ai.ts                 (getChatModel: OpenAI + Azure OpenAI)
+│   ├── encryption.ts
+│   ├── applications.ts
+│   ├── repositories.ts
+│   ├── repository-utils.ts
+│   ├── scenarios.ts
+│   ├── agents/
+│   │   ├── pipeline.ts       (Orchestrator + credentials in context)
+│   │   ├── mcp-client.ts     (Persistent Playwright MCP singleton)
+│   │   ├── analyst.ts        (AI: generateText → JSON questions)
+│   │   ├── prompt-builder.ts (AI: structured prompt + approval loop)
+│   │   ├── script-generator.ts (AI + Playwright MCP → test script)
+│   │   ├── reviewer.ts       (Headless execution + AI auto-fix)
+│   │   ├── git-providers.ts  (GitHub + ADO REST API wrappers)
+│   │   └── pr-creator.ts     (Branch/commit/PR via git-providers)
 │   ├── actions/
-│   │   ├── applications.ts (Server Actions for app mutations)
-│   │   ├── repositories.ts (Server Actions for repo mutations)
-│   │   └── scenarios.ts  (Server Action for scenario creation)
 │   ├── schemas/
-│   │   ├── application.ts  (Zod validation schema)
-│   │   ├── repository.ts   (Zod repo schema with provider-specific refinements)
-│   │   └── scenario.ts    (Zod scenario schema: inputText 10-5000, app/repo IDs)
-│   └── __tests__/
-│       ├── encryption.test.ts   (10 tests)
-│       ├── applications.test.ts (17 tests)
-│       ├── repositories.test.ts (34 tests)
-│       └── scenarios.test.ts    (12 tests)
+│   └── __tests__/            (73 tests)
 ├── prisma/
-│   ├── schema.prisma    (Application + Repository + Scenario models, prisma-client generator)
-│   └── migrations/      (3 migrations: init, add-repository, add-scenario-model)
-├── public/
-├── .env                 (local -- gitignored, DATABASE_URL with correct password)
-├── .env.example         (committed template)
-├── package.json         (type:module, Next.js 16, Vitest, Prisma 7, prebuild script)
-├── prisma.config.ts     (Prisma 7 config with defineConfig)
-├── tsconfig.json
-├── next.config.ts
-├── eslint.config.mjs    (ESLint 9, ignores generated/**)
-└── postcss.config.mjs
+│   ├── schema.prisma
+│   └── migrations/
+└── package.json
 ```

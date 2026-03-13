@@ -7,24 +7,60 @@ type StatCard = {
 
 function StatCardItem({ label, value, icon, accent = "primary" }: StatCard) {
   const accentStyles = {
-    primary: "bg-primary/10 text-primary",
-    accent: "bg-accent/10 text-accent",
-    emerald: "bg-emerald-100 text-emerald-600",
-    amber: "bg-amber-100 text-amber-600",
+    primary: {
+      bg: "bg-gradient-to-br from-primary/20 to-primary/10",
+      text: "text-primary",
+      border: "border-primary/20",
+      hover: "hover:border-primary/40 hover:shadow-lg hover:shadow-primary/20",
+    },
+    accent: {
+      bg: "bg-gradient-to-br from-accent/20 to-accent/10",
+      text: "text-accent",
+      border: "border-accent/20",
+      hover: "hover:border-accent/40 hover:shadow-lg hover:shadow-accent/20",
+    },
+    emerald: {
+      bg: "bg-gradient-to-br from-emerald-500/20 to-emerald-600/10",
+      text: "text-emerald-400",
+      border: "border-emerald-500/20",
+      hover: "hover:border-emerald-500/40 hover:shadow-lg hover:shadow-emerald-500/20",
+    },
+    amber: {
+      bg: "bg-gradient-to-br from-amber-500/20 to-amber-600/10",
+      text: "text-amber-400",
+      border: "border-amber-500/20",
+      hover: "hover:border-amber-500/40 hover:shadow-lg hover:shadow-amber-500/20",
+    },
   };
 
+  const style = accentStyles[accent];
+
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-border bg-surface p-5 transition-all duration-200 hover:border-border-hover hover:shadow-sm">
-      <div className="flex items-start justify-between">
+    <div className={`group relative overflow-hidden rounded-xl border ${style.border} bg-surface-dim p-6 transition-all duration-300 ${style.hover} hover:-translate-y-1`}>
+      <style>{`
+        @keyframes stat-appear {
+          from {
+            opacity: 0;
+            transform: translateY(16px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .stat-card {
+          animation: stat-appear 0.5s ease-out both;
+        }
+      `}</style>
+      <div className="stat-card flex items-start justify-between relative z-10">
         <div>
-          <p className="text-sm font-medium text-text-secondary">{label}</p>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-text-primary">
+          <p className="text-xs font-bold text-text-muted uppercase tracking-wider">{label}</p>
+          <p className="mt-3 text-4xl font-black tracking-tight text-text-primary">
             {value}
           </p>
         </div>
-        <div
-          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${accentStyles[accent]}`}
-        >
+        <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-lg ${style.bg} ${style.text} transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6`}>
           {icon}
         </div>
       </div>

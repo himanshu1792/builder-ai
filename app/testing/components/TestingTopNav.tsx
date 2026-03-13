@@ -20,12 +20,12 @@ export function TestingTopNav() {
   }
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-border bg-nav-bg/80 backdrop-blur-xl">
+    <nav className="sticky top-0 z-50 border-b border-white/[0.06] bg-[#0a0a0f]/80 backdrop-blur-xl">
       <div className="flex h-14 items-center gap-1 px-4 sm:px-6 lg:px-10">
         {/* Back to AgentForge */}
         <Link
           href="/"
-          className="group mr-4 flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-medium text-text-secondary transition-colors hover:bg-nav-hover hover:text-text-primary"
+          className="group mr-4 flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-medium text-gray-400 transition-colors hover:bg-white/5 hover:text-white"
         >
           <svg
             width="16"
@@ -47,7 +47,7 @@ export function TestingTopNav() {
         </Link>
 
         {/* Divider */}
-        <div className="mr-4 h-6 w-px bg-border" />
+        <div className="mr-4 h-6 w-px bg-white/10" />
 
         {/* Logo */}
         <Link
@@ -84,9 +84,9 @@ export function TestingTopNav() {
               />
             </svg>
           </div>
-          <span className="text-lg font-semibold tracking-tight text-text-primary">
+          <span className="text-lg font-semibold tracking-tight text-white">
             Test
-            <span className="text-primary">Forge</span>
+            <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">Forge</span>
           </span>
         </Link>
 
@@ -100,13 +100,13 @@ export function TestingTopNav() {
                 href={item.href}
                 className={`relative rounded-md px-3 py-1.5 text-sm font-medium transition-colors duration-150 ${
                   active
-                    ? "text-primary"
-                    : "text-text-secondary hover:bg-nav-hover hover:text-text-primary"
+                    ? "text-violet-400"
+                    : "text-gray-400 hover:bg-white/5 hover:text-white"
                 }`}
               >
                 {item.label}
                 {active && (
-                  <span className="absolute bottom-[-13px] left-1/2 h-0.5 w-6 -translate-x-1/2 rounded-full bg-primary" />
+                  <span className="absolute bottom-[-13px] left-1/2 h-0.5 w-6 -translate-x-1/2 rounded-full bg-violet-400" />
                 )}
               </Link>
             );

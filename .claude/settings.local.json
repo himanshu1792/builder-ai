@@ -88,7 +88,13 @@
       "Bash(npx drizzle-kit generate)",
       "Bash(# Find psql where psql.exe || find \"\"/c/Program Files\"\" -name \"\"psql.exe\"\")",
       "Bash(\"/c/Program Files/PostgreSQL/18/bin/psql.exe\" \"postgresql://postgres:admin@localhost:5432/Testforge\" -f \"/c/Projects/tester agent/drizzle/0000_icy_nebula.sql\")",
-      "Bash(npx tsx scripts/seed-model-pricing.ts)"
+      "Bash(npx tsx scripts/seed-model-pricing.ts)",
+      "Bash(python3 skills/ui-ux-pro-max/scripts/search.py \"SaaS dashboard professional modern\" --design-system -p \"Tester Agent\")",
+      "Bash(python skills/ui-ux-pro-max/scripts/search.py \"SaaS dashboard professional modern dark\" --design-system -p \"AgentForge\")",
+      "Bash(py skills/ui-ux-pro-max/scripts/search.py \"SaaS dashboard professional modern dark\" --design-system -p \"AgentForge\")",
+      "Bash(py .claude/skills/ui-ux-pro-max/scripts/search.py \"SaaS dashboard professional modern dark\" --design-system -p \"AgentForge\")",
+      "Bash(py .claude/skills/ui-ux-pro-max/scripts/search.py \"glassmorphism dark SaaS\" --domain style -n 3)",
+      "Bash(py .claude/skills/ui-ux-pro-max/scripts/search.py \"SaaS dashboard sidebar\" --stack nextjs -n 5)"
     ]
   }
 }

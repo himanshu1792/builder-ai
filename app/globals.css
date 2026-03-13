@@ -5,44 +5,50 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ═══════════════════════════════════════════════════════
+   AgentForge — Unified Dark SaaS Theme
+   Glassmorphism dark with violet primary
+   Matches landing page (#0a0a0f background)
+   ═══════════════════════════════════════════════════════ */
+
 /* ───── TestForge theme tokens (used by /testing pages) ───── */
 @theme {
   --color-tf-primary: #7C3AED;
   --color-tf-primary-hover: #6D28D9;
-  --color-tf-primary-light: #EDE9FE;
+  --color-tf-primary-light: rgba(124, 58, 237, 0.15);
   --color-tf-accent: #3B82F6;
-  --color-tf-accent-light: #DBEAFE;
-  --color-tf-surface: #FFFFFF;
-  --color-tf-surface-dim: #F8FAFC;
-  --color-tf-border: #E2E8F0;
-  --color-tf-border-hover: #CBD5E1;
-  --color-tf-nav-bg: #FFFFFF;
+  --color-tf-accent-light: rgba(59, 130, 246, 0.15);
+  --color-tf-surface: #111318;
+  --color-tf-surface-dim: #0d0f14;
+  --color-tf-border: rgba(255, 255, 255, 0.08);
+  --color-tf-border-hover: rgba(255, 255, 255, 0.15);
+  --color-tf-nav-bg: rgba(10, 10, 15, 0.80);
   --color-tf-nav-active: #7C3AED;
-  --color-tf-nav-hover: #F5F3FF;
-  --color-tf-text-primary: #0F172A;
-  --color-tf-text-secondary: #475569;
-  --color-tf-text-muted: #94A3B8;
-  --color-tf-badge-bg: #F1F5F9;
-  --color-tf-badge-text: #64748B;
+  --color-tf-nav-hover: rgba(255, 255, 255, 0.05);
+  --color-tf-text-primary: #f0f0f5;
+  --color-tf-text-secondary: #9ca3b4;
+  --color-tf-text-muted: #6b7280;
+  --color-tf-badge-bg: rgba(255, 255, 255, 0.08);
+  --color-tf-badge-text: #9ca3b4;
 
   /* Keep the original names too for backward compat */
   --color-primary: #7C3AED;
   --color-primary-hover: #6D28D9;
-  --color-primary-light: #EDE9FE;
+  --color-primary-light: rgba(124, 58, 237, 0.15);
   --color-accent: #3B82F6;
-  --color-accent-light: #DBEAFE;
-  --color-surface: #FFFFFF;
-  --color-surface-dim: #F8FAFC;
-  --color-border: #E2E8F0;
-  --color-border-hover: #CBD5E1;
-  --color-nav-bg: #FFFFFF;
+  --color-accent-light: rgba(59, 130, 246, 0.15);
+  --color-surface: #111318;
+  --color-surface-dim: #0d0f14;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.15);
+  --color-nav-bg: rgba(10, 10, 15, 0.80);
   --color-nav-active: #7C3AED;
-  --color-nav-hover: #F5F3FF;
-  --color-text-primary: #0F172A;
-  --color-text-secondary: #475569;
-  --color-text-muted: #94A3B8;
-  --color-badge-bg: #F1F5F9;
-  --color-badge-text: #64748B;
+  --color-nav-hover: rgba(255, 255, 255, 0.05);
+  --color-text-primary: #f0f0f5;
+  --color-text-secondary: #9ca3b4;
+  --color-text-muted: #6b7280;
+  --color-badge-bg: rgba(255, 255, 255, 0.08);
+  --color-badge-text: #9ca3b4;
 }
 
 /* ───── Shadcn / Agent Builder theme tokens ───── */
@@ -88,41 +94,45 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(0.98 0.005 260);
-  --foreground: oklch(0.18 0.02 260);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.02 260);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.02 260);
+  /* ── Dark SaaS palette ── */
+  --background: oklch(0.09 0.01 260);
+  --foreground: oklch(0.93 0.005 260);
+  --card: oklch(0.13 0.01 260);
+  --card-foreground: oklch(0.93 0.005 260);
+  --popover: oklch(0.14 0.012 260);
+  --popover-foreground: oklch(0.93 0.005 260);
   --primary: oklch(0.55 0.18 260);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.95 0.02 260);
-  --secondary-foreground: oklch(0.30 0.04 260);
-  --muted: oklch(0.96 0.005 260);
-  --muted-foreground: oklch(0.50 0.02 260);
-  --accent: oklch(0.94 0.03 260);
-  --accent-foreground: oklch(0.30 0.04 260);
-  --destructive: oklch(0.60 0.22 25);
-  --border: oklch(0.92 0.01 260);
-  --input: oklch(0.92 0.01 260);
+  --secondary: oklch(0.17 0.012 260);
+  --secondary-foreground: oklch(0.85 0.01 260);
+  --muted: oklch(0.16 0.008 260);
+  --muted-foreground: oklch(0.58 0.015 260);
+  --accent: oklch(0.18 0.015 260);
+  --accent-foreground: oklch(0.90 0.01 260);
+  --destructive: oklch(0.55 0.22 25);
+  --border: oklch(0.22 0.01 260);
+  --input: oklch(0.22 0.01 260);
   --ring: oklch(0.55 0.18 260);
-  --chart-1: oklch(0.72 0.14 155);
-  --chart-2: oklch(0.68 0.16 20);
-  --chart-3: oklch(0.65 0.14 250);
-  --chart-4: oklch(0.78 0.14 80);
-  --chart-5: oklch(0.68 0.15 300);
-  --sidebar: oklch(0.99 0.005 260);
-  --sidebar-foreground: oklch(0.35 0.03 260);
+  --chart-1: oklch(0.65 0.18 260);
+  --chart-2: oklch(0.60 0.16 165);
+  --chart-3: oklch(0.65 0.16 45);
+  --chart-4: oklch(0.70 0.14 200);
+  --chart-5: oklch(0.60 0.15 330);
+  --sidebar: oklch(0.11 0.01 260);
+  --sidebar-foreground: oklch(0.65 0.015 260);
   --sidebar-primary: oklch(0.55 0.18 260);
   --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.94 0.04 260);
-  --sidebar-accent-foreground: oklch(0.30 0.04 260);
-  --sidebar-border: oklch(0.93 0.01 260);
+  --sidebar-accent: oklch(0.18 0.015 260);
+  --sidebar-accent-foreground: oklch(0.90 0.01 260);
+  --sidebar-border: oklch(0.22 0.01 260);
   --sidebar-ring: oklch(0.55 0.18 260);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }

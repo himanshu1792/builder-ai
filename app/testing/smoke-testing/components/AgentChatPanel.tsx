@@ -175,8 +175,8 @@ function MessageBubble({ message }: { message: ChatMessage }) {
 
     case "pr_link":
       return (
-        <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-center">
-          <p className="mb-2 text-sm font-medium text-emerald-800">Pull Request Created</p>
+        <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 p-4 text-center">
+          <p className="mb-2 text-sm font-medium text-emerald-400">Pull Request Created</p>
           <a
             href={message.url}
             target="_blank"
@@ -195,8 +195,8 @@ function MessageBubble({ message }: { message: ChatMessage }) {
 
     case "error":
       return (
-        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3">
-          <p className="text-sm font-medium text-red-700">{message.text}</p>
+        <div className="rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3">
+          <p className="text-sm font-medium text-red-400">{message.text}</p>
         </div>
       );
 
@@ -308,11 +308,11 @@ function PromptApproval({
   }
 
   return (
-    <div className="space-y-3 rounded-lg border border-blue-200 bg-blue-50/50 p-4">
-      <p className="text-xs font-semibold uppercase tracking-wider text-blue-700">
+    <div className="space-y-3 rounded-lg border border-blue-500/20 bg-blue-500/10 p-4">
+      <p className="text-xs font-semibold uppercase tracking-wider text-blue-400">
         Review Generated Prompt
       </p>
-      <div className="prose prose-sm max-w-none rounded-lg bg-white p-3 text-text-primary shadow-sm prose-headings:text-text-primary prose-strong:text-text-primary prose-li:text-text-primary">
+      <div className="prose prose-sm max-w-none rounded-lg bg-white/[0.05] p-3 text-text-primary shadow-sm prose-headings:text-text-primary prose-strong:text-text-primary prose-li:text-text-primary">
         <ReactMarkdown>{stripCodeFence(prompt)}</ReactMarkdown>
       </div>
       <div className="flex gap-2">
@@ -327,7 +327,7 @@ function PromptApproval({
             const el = document.getElementById("reject-reason");
             if (el) el.classList.toggle("hidden");
           }}
-          className="rounded-lg border border-red-300 bg-white px-4 py-2 text-sm font-medium text-red-700 transition-colors hover:bg-red-50"
+          className="rounded-lg border border-red-500/30 bg-white/[0.03] px-4 py-2 text-sm font-medium text-red-400 transition-colors hover:bg-red-500/10"
         >
           Reject
         </button>
@@ -336,7 +336,7 @@ function PromptApproval({
         <textarea
           ref={reasonRef}
           placeholder="Provide a reason for rejection (required)..."
-          className="w-full resize-none rounded-lg border border-border bg-white px-3 py-2 text-sm text-text-primary placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+          className="w-full resize-none rounded-lg border border-border bg-white/[0.03] px-3 py-2 text-sm text-text-primary placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
           rows={2}
         />
         <button
@@ -352,17 +352,17 @@ function PromptApproval({
 
 function AgentAvatar({ agent }: { agent: string }) {
   const colors: Record<string, string> = {
-    analyst: "bg-violet-100 text-violet-600",
-    prompt_builder: "bg-blue-100 text-blue-600",
-    script_generator: "bg-amber-100 text-amber-600",
-    reviewer: "bg-emerald-100 text-emerald-600",
-    pr_creator: "bg-indigo-100 text-indigo-600",
+    analyst: "bg-violet-500/10 text-violet-400",
+    prompt_builder: "bg-blue-500/10 text-blue-400",
+    script_generator: "bg-amber-500/10 text-amber-400",
+    reviewer: "bg-emerald-500/10 text-emerald-400",
+    pr_creator: "bg-indigo-500/10 text-indigo-400",
   };
 
   return (
     <div
       className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[10px] font-bold uppercase ${
-        colors[agent] || "bg-gray-100 text-gray-600"
+        colors[agent] || "bg-white/[0.05] text-gray-400"
       }`}
     >
       {agent.charAt(0).toUpperCase()}

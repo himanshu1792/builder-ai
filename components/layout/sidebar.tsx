@@ -23,13 +23,13 @@ interface SidebarProps {
 }
 
 const iconColors: Record<string, { bg: string; text: string }> = {
-  Dashboard: { bg: 'bg-blue-50', text: 'text-blue-500' },
-  Agents: { bg: 'bg-emerald-50', text: 'text-emerald-500' },
-  Orchestrations: { bg: 'bg-amber-50', text: 'text-amber-500' },
-  Playground: { bg: 'bg-violet-50', text: 'text-violet-500' },
-  Billing: { bg: 'bg-rose-50', text: 'text-rose-400' },
-  Applications: { bg: 'bg-indigo-50', text: 'text-indigo-500' },
-  'Model Pricing': { bg: 'bg-slate-100', text: 'text-slate-500' },
+  Dashboard: { bg: 'bg-blue-500/10', text: 'text-blue-400' },
+  Agents: { bg: 'bg-emerald-500/10', text: 'text-emerald-400' },
+  Orchestrations: { bg: 'bg-amber-500/10', text: 'text-amber-400' },
+  Playground: { bg: 'bg-violet-500/10', text: 'text-violet-400' },
+  Billing: { bg: 'bg-rose-500/10', text: 'text-rose-400' },
+  Applications: { bg: 'bg-indigo-500/10', text: 'text-indigo-400' },
+  'Model Pricing': { bg: 'bg-slate-500/10', text: 'text-slate-400' },
 };
 
 export function Sidebar({ appId, appName }: SidebarProps) {
@@ -61,7 +61,7 @@ export function Sidebar({ appId, appName }: SidebarProps) {
 
   const renderLink = (link: { href: string; label: string; icon: React.ComponentType<{ className?: string }> }) => {
     const active = isActive(link.href);
-    const colors = iconColors[link.label] ?? { bg: 'bg-gray-50', text: 'text-gray-500' };
+    const colors = iconColors[link.label] ?? { bg: 'bg-gray-500/10', text: 'text-gray-400' };
     return (
       <Link
         key={link.href}
@@ -116,7 +116,7 @@ export function Sidebar({ appId, appName }: SidebarProps) {
             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <Sparkles className="h-4 w-4" />
             </div>
-            <span>Agent Builder</span>
+            <span>Agent<span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">Builder</span></span>
           </Link>
         )}
         <button

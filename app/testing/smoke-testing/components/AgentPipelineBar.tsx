@@ -29,12 +29,12 @@ export function AgentPipelineBar({ steps = defaultSteps, prUrl }: AgentPipelineB
             <div
               className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors ${
                 step.status === "active"
-                  ? "bg-blue-100 text-blue-700"
+                  ? "bg-blue-500/10 text-blue-400"
                   : step.status === "complete"
-                  ? "bg-emerald-100 text-emerald-700"
+                  ? "bg-emerald-500/10 text-emerald-400"
                   : step.status === "failed"
-                  ? "bg-red-100 text-red-700"
-                  : "bg-gray-100 text-text-muted"
+                  ? "bg-red-500/10 text-red-400"
+                  : "bg-white/[0.05] text-text-muted"
               }`}
             >
               <StepIcon status={step.status} />
@@ -47,10 +47,10 @@ export function AgentPipelineBar({ steps = defaultSteps, prUrl }: AgentPipelineB
                 <div
                   className={`h-px w-4 ${
                     steps[i + 1].status !== "pending" || step.status === "complete"
-                      ? "bg-emerald-300"
+                      ? "bg-emerald-500/40"
                       : step.status === "active"
-                      ? "bg-blue-300"
-                      : "bg-gray-200"
+                      ? "bg-blue-500/40"
+                      : "bg-white/[0.08]"
                   }`}
                 />
                 <svg

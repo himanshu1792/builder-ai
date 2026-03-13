@@ -63,8 +63,8 @@ export default async function Dashboard() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* Applications Overview - takes 2 columns */}
         <div className="lg:col-span-2">
-          <div className="rounded-xl border border-border bg-surface">
-            <div className="flex items-center justify-between border-b border-border px-5 py-4">
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm">
+            <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-4">
               <h2 className="text-sm font-semibold text-text-primary">
                 Recent Applications
               </h2>
@@ -79,11 +79,11 @@ export default async function Dashboard() {
             </div>
 
             {recentApps.length > 0 ? (
-              <div className="divide-y divide-border">
+              <div className="divide-y divide-white/[0.06]">
                 {recentApps.map((app) => (
                   <div
                     key={app.id}
-                    className="flex items-center gap-4 px-5 py-3.5 transition-colors hover:bg-surface-dim"
+                    className="flex items-center gap-4 px-5 py-3.5 transition-colors hover:bg-white/[0.04]"
                   >
                     <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary-light text-xs font-bold text-primary">
                       {app.name.charAt(0).toUpperCase()}
@@ -104,7 +104,7 @@ export default async function Dashboard() {
               </div>
             ) : (
               <div className="px-5 py-12 text-center">
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-surface-dim">
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/[0.04]">
                   <svg
                     width="24"
                     height="24"
@@ -182,8 +182,8 @@ export default async function Dashboard() {
         {/* Right Column: Placeholder sections */}
         <div className="space-y-6">
           {/* Last Run Placeholder */}
-          <div className="rounded-xl border border-border bg-surface">
-            <div className="border-b border-border px-5 py-4">
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm">
+            <div className="border-b border-white/[0.06] px-5 py-4">
               <h2 className="text-sm font-semibold text-text-primary">
                 Last Run
               </h2>
@@ -224,8 +224,8 @@ export default async function Dashboard() {
           </div>
 
           {/* Recent Scripts Placeholder */}
-          <div className="rounded-xl border border-border bg-surface">
-            <div className="border-b border-border px-5 py-4">
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm">
+            <div className="border-b border-white/[0.06] px-5 py-4">
               <h2 className="text-sm font-semibold text-text-primary">
                 Recent Scripts
               </h2>

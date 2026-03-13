@@ -92,22 +92,22 @@ const agents = [
 
 const colorStyles = {
   primary: {
-    iconBg: "bg-primary/10",
-    iconText: "text-primary",
-    statusDot: "bg-primary",
-    statusGlow: "bg-primary/40",
+    iconBg: "bg-violet-500/10",
+    iconText: "text-violet-400",
+    statusDot: "bg-violet-400",
+    statusGlow: "bg-violet-400/40",
   },
   accent: {
-    iconBg: "bg-accent/10",
-    iconText: "text-accent",
-    statusDot: "bg-accent",
-    statusGlow: "bg-accent/40",
+    iconBg: "bg-blue-500/10",
+    iconText: "text-blue-400",
+    statusDot: "bg-blue-400",
+    statusGlow: "bg-blue-400/40",
   },
   emerald: {
-    iconBg: "bg-emerald-100",
-    iconText: "text-emerald-600",
-    statusDot: "bg-emerald-500",
-    statusGlow: "bg-emerald-500/40",
+    iconBg: "bg-emerald-500/10",
+    iconText: "text-emerald-400",
+    statusDot: "bg-emerald-400",
+    statusGlow: "bg-emerald-400/40",
   },
 };
 
@@ -151,10 +151,10 @@ export function AgentShowcase() {
       `}</style>
 
       <div className="flex items-center gap-3 mb-4">
-        <h2 className="text-sm font-semibold text-text-primary">
+        <h2 className="text-sm font-semibold text-white">
           Meet Your Agents
         </h2>
-        <div className="h-px flex-1 bg-border" />
+        <div className="h-px flex-1 bg-white/[0.06]" />
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -163,7 +163,7 @@ export function AgentShowcase() {
           return (
             <div
               key={agent.name}
-              className="agent-card group relative overflow-hidden rounded-xl border border-border bg-surface p-5 transition-all duration-200 hover:border-border-hover hover:shadow-sm"
+              className="agent-card group relative overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.03] p-5 transition-all duration-200 hover:border-white/[0.12] hover:bg-white/[0.05] backdrop-blur-sm"
             >
               <div className="flex items-start justify-between">
                 <div
@@ -180,17 +180,17 @@ export function AgentShowcase() {
                       className={`relative h-1.5 w-1.5 rounded-full ${styles.statusDot}`}
                     />
                   </div>
-                  <span className="text-[11px] font-medium text-text-muted">
+                  <span className="text-[11px] font-medium text-gray-500">
                     Ready
                   </span>
                 </div>
               </div>
 
               <div className="mt-4">
-                <h3 className="text-sm font-semibold text-text-primary">
+                <h3 className="text-sm font-semibold text-white">
                   {agent.name}
                 </h3>
-                <p className="mt-1.5 text-xs leading-relaxed text-text-secondary">
+                <p className="mt-1.5 text-xs leading-relaxed text-gray-400">
                   {agent.description}
                 </p>
               </div>

@@ -7,18 +7,18 @@ type StatCard = {
 
 function StatCardItem({ label, value, icon, accent = "primary" }: StatCard) {
   const accentStyles = {
-    primary: "bg-primary/10 text-primary",
-    accent: "bg-accent/10 text-accent",
-    emerald: "bg-emerald-100 text-emerald-600",
-    amber: "bg-amber-100 text-amber-600",
+    primary: "bg-violet-500/10 text-violet-400",
+    accent: "bg-blue-500/10 text-blue-400",
+    emerald: "bg-emerald-500/10 text-emerald-400",
+    amber: "bg-amber-500/10 text-amber-400",
   };
 
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-border bg-surface p-5 transition-all duration-200 hover:border-border-hover hover:shadow-sm">
+    <div className="group relative overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.03] p-5 transition-all duration-200 hover:border-white/[0.12] hover:bg-white/[0.05] backdrop-blur-sm">
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm font-medium text-text-secondary">{label}</p>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-text-primary">
+          <p className="text-sm font-medium text-gray-400">{label}</p>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-white">
             {value}
           </p>
         </div>

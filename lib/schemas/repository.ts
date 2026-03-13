@@ -8,7 +8,8 @@ export const repositorySchema = z
     provider: z.enum(["github", "ado"], { error: "Select a provider" }),
     repoUrl: z.string().url({ error: "Must be a valid URL" }),
     pat: z.string().min(1, { error: "Personal Access Token is required" }),
-    organization: z.string().optional(),
+    // For GitHub this will be null from FormData; for ADO we enforce it via a refine below.
+    organization: z.string().nullable().optional(),
     outputFolder: z.string().min(1, { error: "Output folder is required" }),
   })
   .refine(

@@ -2,18 +2,24 @@ import { prisma } from "./prisma";
 
 // --- Types ---
 
+/** Scenario type discriminator */
+export type ScenarioType = "smoke" | "regression";
+
 /** Input for creating a new scenario */
 export type ScenarioInput = {
   inputText: string;
   applicationId: string;
   repositoryId: string;
+  type?: ScenarioType;
 };
 
 /** Scenario list item with related application name and repository info */
 export type ScenarioListItem = {
   id: string;
+  type: ScenarioType;
   inputText: string;
   status: string;
+  prUrl: string | null;
   applicationId: string;
   repositoryId: string;
   createdAt: Date;
@@ -25,10 +31,14 @@ export type ScenarioListItem = {
 /** Full scenario view including nullable fields and detailed relations */
 export type ScenarioView = {
   id: string;
+  type: ScenarioType;
   inputText: string;
   status: string;
+  currentAgent: string | null;
   refinedPrompt: string | null;
+  testPlan: string | null;
   generatedScript: string | null;
+  prUrl: string | null;
   errorMessage: string | null;
   applicationId: string;
   repositoryId: string;
@@ -44,6 +54,20 @@ export type GroupedRepositories = Record<
   Array<{ id: string; provider: string; repoUrl: string }>
 >;
 
+/** Agent names in the smoke testing pipeline */
+export type AgentName =
+  | "analyst"
+  | "prompt_builder"
+  | "script_generator"
+  | "reviewer"
+  | "pr_creator";
+
+/** Agent names in the regression testing pipeline */
+export type RegressionAgentName =
+  | "planner"
+  | "generator"
+  | "healer";
+
 // --- Service Functions ---
 
 /**
@@ -54,6 +78,7 @@ export type GroupedRepositories = Record<
 export async function createScenario(input: ScenarioInput) {
   return prisma.scenario.create({
     data: {
+      type: input.type || "smoke",
       inputText: input.inputText,
       applicationId: input.applicationId,
       repositoryId: input.repositoryId,
@@ -70,8 +95,10 @@ export async function listScenarios(): Promise<ScenarioListItem[]> {
   return prisma.scenario.findMany({
     select: {
       id: true,
+      type: true,
       inputText: true,
       status: true,
+      prUrl: true,
       applicationId: true,
       repositoryId: true,
       createdAt: true,
@@ -139,4 +166,81 @@ export async function listAllRepositoriesGrouped(): Promise<GroupedRepositories>
   }
 
   return grouped;
+}
+
+// --- Phase 5: Pipeline Update Functions ---
+
+/**
+ * Update the pipeline status and current agent for a scenario run.
+ */
+export async function updateScenarioStatus(
+  id: string,
+  status: string,
+  currentAgent?: AgentName | RegressionAgentName | null
+) {
+  return prisma.scenario.update({
+    where: { id },
+    data: {
+      status,
+      ...(currentAgent !== undefined && { currentAgent }),
+    },
+  });
+}
+
+/**
+ * Save the refined prompt after user accepts it.
+ */
+export async function saveRefinedPrompt(id: string, refinedPrompt: string) {
+  return prisma.scenario.update({
+    where: { id },
+    data: { refinedPrompt },
+  });
+}
+
+/**
+ * Save the approved test plan (regression testing).
+ */
+export async function saveTestPlan(id: string, testPlan: string) {
+  return prisma.scenario.update({
+    where: { id },
+    data: { testPlan },
+  });
+}
+
+/**
+ * Save the generated script after reviewer approves it.
+ */
+export async function saveGeneratedScript(id: string, generatedScript: string) {
+  return prisma.scenario.update({
+    where: { id },
+    data: { generatedScript },
+  });
+}
+
+/**
+ * Save the PR URL after PR Creator agent completes.
+ */
+export async function savePrUrl(id: string, prUrl: string) {
+  return prisma.scenario.update({
+    where: { id },
+    data: {
+      prUrl,
+      status: "completed",
+      currentAgent: null,
+    },
+  });
+}
+
+/**
+ * Mark a scenario run as failed with an error message.
+ */
+export async function failScenario(id: string, errorMessage: string) {
+  return prisma.scenario.update({
+    where: { id },
+    data: {
+      status: "failed",
+      currentAgent: null,
+      errorMessage,
+    },
+  });
 }

@@ -33,10 +33,14 @@ describe("scenarios service", () => {
       const now = new Date();
       mockPrisma.scenario.create.mockResolvedValue({
         id: "scenario-id-1",
+        type: "smoke",
         inputText: input.inputText,
         status: "queued",
+        currentAgent: null,
         refinedPrompt: null,
+        testPlan: null,
         generatedScript: null,
+        prUrl: null,
         errorMessage: null,
         applicationId: input.applicationId,
         repositoryId: input.repositoryId,
@@ -48,6 +52,7 @@ describe("scenarios service", () => {
 
       expect(mockPrisma.scenario.create).toHaveBeenCalledWith({
         data: {
+          type: "smoke",
           inputText: input.inputText,
           applicationId: input.applicationId,
           repositoryId: input.repositoryId,
@@ -66,10 +71,14 @@ describe("scenarios service", () => {
       const now = new Date();
       mockPrisma.scenario.create.mockResolvedValue({
         id: "scenario-id-2",
+        type: "smoke",
         inputText: input.inputText,
         status: "queued",
+        currentAgent: null,
         refinedPrompt: null,
+        testPlan: null,
         generatedScript: null,
+        prUrl: null,
         errorMessage: null,
         applicationId: input.applicationId,
         repositoryId: input.repositoryId,

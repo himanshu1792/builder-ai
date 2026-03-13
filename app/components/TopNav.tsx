@@ -6,13 +6,12 @@ import { usePathname } from "next/navigation";
 const navItems = [
   { label: "Dashboard", href: "/", exact: true },
   { label: "Applications", href: "/applications", exact: false },
-  { label: "Scenarios", href: "/scenarios", exact: false },
+  { label: "Smoke Testing", href: "/smoke-testing", exact: false },
+  { label: "Regression Testing", href: "/regression-testing", exact: false },
+  { label: "Run History", href: "/run-history", exact: false },
 ] as const;
 
-const comingSoonItems = [
-  { label: "Manual Testing" },
-  { label: "Regression Testing" },
-] as const;
+const comingSoonItems: ReadonlyArray<{ label: string }> = [];
 
 export function TopNav() {
   const pathname = usePathname();
@@ -24,11 +23,11 @@ export function TopNav() {
 
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-nav-bg/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-14 max-w-7xl items-center gap-1 px-4 sm:px-6 lg:px-8">
+      <div className="flex h-14 items-center gap-1 px-4 sm:px-6 lg:px-10">
         {/* Logo */}
         <Link
           href="/"
-          className="group mr-8 flex items-center gap-2.5 outline-none"
+          className="group mr-12 flex items-center gap-2.5 outline-none"
         >
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary shadow-sm shadow-primary/25 transition-shadow duration-200 group-hover:shadow-md group-hover:shadow-primary/30">
             <svg
@@ -67,7 +66,7 @@ export function TopNav() {
         </Link>
 
         {/* Navigation Links */}
-        <div className="flex items-center gap-0.5">
+        <div className="flex items-center gap-6">
           {navItems.map((item) => {
             const active = isActive(item.href, item.exact);
             return (

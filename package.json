@@ -18,13 +18,20 @@
     "db:reset": "npx prisma migrate reset"
   },
   "dependencies": {
+    "@ai-sdk/azure": "^3.0.42",
+    "@ai-sdk/mcp": "^1.0.25",
+    "@ai-sdk/openai": "^3.0.41",
+    "@playwright/mcp": "^0.0.68",
     "@prisma/adapter-pg": "^7.4.2",
     "@prisma/client": "^7.4.2",
+    "@tailwindcss/typography": "^0.5.19",
+    "ai": "^6.0.116",
     "dotenv": "^17.3.1",
     "next": "16.1.6",
     "pg": "^8.20.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-markdown": "^10.1.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {

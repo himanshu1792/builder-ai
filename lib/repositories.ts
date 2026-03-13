@@ -219,6 +219,14 @@ export async function validateAdoPat(
  * Create a new repository with encrypted PAT.
  */
 export async function createRepository(input: RepositoryInput) {
+  console.log("[createRepository] creating repository with input", {
+    provider: input.provider,
+    repoUrl: input.repoUrl,
+    hasPat: !!input.pat,
+    organization: input.organization,
+    outputFolder: input.outputFolder,
+    applicationId: input.applicationId,
+  });
   return prisma.repository.create({
     data: {
       provider: input.provider,

@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Application Management** - Register, view, edit, and delete applications with encrypted credentials
 - [x] **Phase 3: Repository Management** - Connect GitHub and Azure DevOps repos with tokens and output folder configuration
 - [x] **Phase 4: Scenario Authoring & History** - Data layer and form components reused by Phase 5; Run History nav item
-- [ ] **Phase 5: Smoke Testing** - Human-in-the-loop agent pipeline: analyst, prompt builder (with approval), script generator (live Chromium), reviewer, PR creator
+- [x] **Phase 5: Smoke Testing** - Human-in-the-loop agent pipeline UI, SSE streaming, agent stubs (AI integration pending)
 - [ ] **Phase 6: Regression Testing** - Playwright built-in agents (Planner, Executor, Healer) with plan review before execution
 - [ ] **Phase 7: Programmatic API** - REST endpoint for triggering test generation and polling job status externally
 
@@ -35,9 +35,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 - [x] PLAN-01 — Next.js 16 scaffold + local PostgreSQL + environment setup
-- [ ] PLAN-02 — Prisma 7 ORM setup, Application schema, and database migration
-- [ ] PLAN-03 — AES-256-GCM encryption module (TDD)
-- [ ] PLAN-04 — Application shell branding + final validation (TypeScript, ESLint, build)
+- [x] PLAN-02 — Prisma 7 ORM setup, Application schema, and database migration
+- [x] PLAN-03 — AES-256-GCM encryption module (TDD)
+- [x] PLAN-04 — Application shell branding + final validation (TypeScript, ESLint, build)
 
 ### Phase 2: Application Management
 **Goal**: Users can manage the applications they want to generate tests for, with credentials stored securely
@@ -52,10 +52,10 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 02-01-PLAN.md -- Data layer: Application service module + Zod schema + Server Actions (TDD)
-- [ ] 02-02-PLAN.md -- Navigation shell: TopNav component + purple/blue theme + layout
-- [ ] 02-03-PLAN.md -- Application CRUD UI: list page + create/edit modal + delete dialog
-- [ ] 02-04-PLAN.md -- Dashboard: stats, app overview, placeholders, Meet Your Agents
+- [x] 02-01-PLAN.md -- Data layer: Application service module + Zod schema + Server Actions (TDD)
+- [x] 02-02-PLAN.md -- Navigation shell: TopNav component + purple/blue theme + layout
+- [x] 02-03-PLAN.md -- Application CRUD UI: list page + create/edit modal + delete dialog
+- [x] 02-04-PLAN.md -- Dashboard: stats, app overview, placeholders, Meet Your Agents
 
 ### Phase 3: Repository Management
 **Goal**: Users can connect their GitHub and Azure DevOps repositories and configure where generated scripts should be placed
@@ -85,8 +85,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 04-01-PLAN.md -- Scenario data layer: Prisma model (forward-compatible), service (TDD), Zod schema, server action with cross-entity validation
-- [ ] 04-02-PLAN.md -- Scenario UI: list page, authoring form with dependent app/repo dropdowns, detail page with multi-section layout, TopNav update
+- [x] 04-01-PLAN.md -- Scenario data layer: Prisma model (forward-compatible), service (TDD), Zod schema, server action with cross-entity validation
+- [x] 04-02-PLAN.md -- Scenario UI: list page, authoring form with dependent app/repo dropdowns, detail page with multi-section layout, TopNav update
 
 ### Phase 5: Smoke Testing
 **Goal**: Users submit a plain-English scenario, watch a human-in-the-loop AI agent pipeline generate a Playwright script and open a PR, with prompt approval at the midpoint
@@ -101,12 +101,26 @@ Plans:
   6. PR Creator agent creates a branch, pushes the script, opens a PR; the PR link is visible on screen
   7. The full run (input, accepted prompt, script, PR link) is saved and accessible in Run History
   8. The linear pipeline bar (Analyst → Prompt Builder → Script Generator → Reviewer → PR Creator) shows which agent is active at all times
-**Plans**: TBD
+**Completed**: 2026-03-12 (UI + pipeline architecture; AI integration pending)
 
-Plans:
-- [ ] 05-01: TBD
-- [ ] 05-02: TBD
-- [ ] 05-03: TBD
+**What was built:**
+- Smoke Testing split-panel page (`/smoke-testing`) with left form + right agent chat
+- Agent Pipeline Bar with 5-step visual progress (pending/active/complete/failed states)
+- Agent Chat Panel with streaming messages, Q&A input, prompt approval/rejection
+- Run History pages (`/run-history` list + `/run-history/[id]` detail)
+- SSE streaming API (`/api/runs/[id]/stream`) for real-time pipeline events
+- User interaction API (`/api/runs/[id]/respond`) for answering questions and approving prompts
+- Pipeline orchestrator (`lib/agents/pipeline.ts`) with in-memory interaction state
+- 5 agent stubs (analyst, prompt-builder, script-generator, reviewer, pr-creator)
+- DB migration: added `prUrl` and `currentAgent` fields to Scenario model
+- Updated TopNav: removed Scenarios, added Smoke Testing + Run History + Regression Testing (coming soon)
+- Extended scenarios service with `updateScenarioStatus`, `saveRefinedPrompt`, `saveGeneratedScript`, `savePrUrl`, `failScenario`
+
+**Pending (AI integration):**
+- Wire agents to Vercel AI SDK (`ai` + `@ai-sdk/azure`) for real LLM calls
+- Playwright integration for Script Generator (live Chromium)
+- Playwright execution in Reviewer for script validation + auto-fix
+- Real GitHub/ADO API calls in PR Creator
 
 ### Phase 6: Regression Testing
 **Goal**: Users submit a scenario, review a plain-English plan from the Planner agent, then watch Playwright's built-in Executor and Healer agents generate and stabilize the test script
@@ -136,6 +150,54 @@ Plans:
 Plans:
 - [ ] 07-01: TBD
 
+## Requirements Coverage
+
+### Phase 5: Smoke Testing — Requirements Breakdown
+
+| Requirement | Description | Status |
+|-------------|-------------|--------|
+| **UI Architecture** | Split-panel layout, agent chat, pipeline bar | Done |
+| **Analyst Agent** | LLM analyzes scenario, asks clarifying Qs (text or buttons) | Stub (needs AI SDK) |
+| **Prompt Builder** | LLM generates structured prompt, user approves/rejects with reason | Stub (needs AI SDK) |
+| **Script Generator** | LLM + Playwright generates .spec.js, shows live Chromium in chat | Stub (needs AI SDK + Playwright) |
+| **Reviewer** | Runs script in Playwright, AI analyzes errors, auto-fixes up to 3x, shows thinking + Chromium | Stub (needs AI SDK + Playwright) |
+| **PR Creator** | Creates branch, pushes script, opens PR via GitHub/ADO API | Stub (needs real API calls) |
+| **Run History** | List + detail pages showing all past runs with PR links | Done |
+| **SSE Streaming** | Real-time pipeline events from server to client | Done |
+| **Human-in-the-loop** | Q&A interaction + prompt approval/rejection loop | Done (architecture) |
+| **DB Persistence** | prUrl, currentAgent, status tracking throughout pipeline | Done |
+| **AI Framework** | Vercel AI SDK (`ai` + `@ai-sdk/azure`) | Decided, not installed |
+
+### Phase 5 AI Integration — What's Needed
+
+These items complete Phase 5's full functionality:
+
+1. **Install packages:** `ai`, `@ai-sdk/azure`, `playwright`
+2. **Analyst:** Replace stub with `generateText()` call to analyze scenario and produce questions
+3. **Prompt Builder:** Replace stub with `generateText()` to build structured prompt from scenario + Q&A
+4. **Script Generator:** Use Playwright MCP or direct Playwright API + AI to navigate app and generate script; stream Chromium screenshots to agent chat panel
+5. **Reviewer:** Run generated script via Playwright, capture errors, use AI to diagnose and fix; show thinking process ("Found error on line X... fixing selector...") and Chromium activity in agent chat
+6. **PR Creator:** Use GitHub REST API (Octokit) or ADO REST API to create branch, commit file, open PR
+7. **Environment:** Need `AZURE_OPENAI_RESOURCE_NAME`, `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_DEPLOYMENT` in `.env`
+
+### Phase 6: Regression Testing — Requirements
+
+| Requirement | Description | Covered By |
+|-------------|-------------|------------|
+| Regression Testing screen | Split-panel with 3-agent pipeline (Planner, Executor, Healer) | Phase 6 UI |
+| Planner agent | LLM generates plain-English step-by-step plan, user reviews | Phase 6 |
+| Executor agent | Playwright built-in agent generates script from approved plan | Phase 6 |
+| Healer agent | Detects + auto-fixes script errors, shows Chromium | Phase 6 |
+| Reuses Phase 5 components | AgentPipelineBar (3 steps), AgentChatPanel, SSE, StatusBadge | Phase 5 (done) |
+
+### Phase 7: Programmatic API — Requirements
+
+| Requirement | Description | Covered By |
+|-------------|-------------|------------|
+| POST trigger | `/api/generate/:appId/:repoId` starts test generation job | Phase 7 |
+| Job ID response | Immediate response with job ID + status URL | Phase 7 |
+| Status polling | GET endpoint returns status + PR link on completion | Phase 7 |
+
 ## Progress
 
 **Execution Order:**
@@ -147,6 +209,6 @@ Phases execute in numeric order: 1 --> 2 --> 3 --> 4 --> 5 --> 6 --> 7
 | 2. Application Management | 4/4 | Complete | 2026-03-08 |
 | 3. Repository Management | 3/3 | Complete | 2026-03-09 |
 | 4. Scenario Authoring & History | 2/2 | Complete | 2026-03-11 |
-| 5. Smoke Testing | 0/3 | Not started | - |
+| 5. Smoke Testing | N/A (direct) | Complete (UI+arch) | 2026-03-12 |
 | 6. Regression Testing | 0/2 | Not started | - |
 | 7. Programmatic API | 0/1 | Not started | - |

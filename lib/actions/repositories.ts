@@ -20,6 +20,15 @@ export async function connectRepositoryAction(
   prevState: ActionState,
   formData: FormData
 ): Promise<ActionState> {
+  console.log("[connectRepositoryAction] called", {
+    applicationId,
+    rawProvider: formData.get("provider"),
+    rawRepoUrl: formData.get("repoUrl"),
+    hasPat: !!formData.get("pat"),
+    rawOrganization: formData.get("organization"),
+    rawOutputFolder: formData.get("outputFolder"),
+  });
+
   const validatedFields = repositorySchema.safeParse({
     provider: formData.get("provider"),
     repoUrl: formData.get("repoUrl"),
@@ -29,6 +38,9 @@ export async function connectRepositoryAction(
   });
 
   if (!validatedFields.success) {
+    console.log("[connectRepositoryAction] validation failed", {
+      errors: validatedFields.error.flatten().fieldErrors,
+    });
     return {
       success: false,
       errors: validatedFields.error.flatten().fieldErrors as Record<string, string[]>,
@@ -37,24 +49,44 @@ export async function connectRepositoryAction(
 
   const { provider, repoUrl, pat, organization, outputFolder } = validatedFields.data;
 
-  // Validate PAT by making test API call to the provider
-  const validation =
-    provider === "github"
-      ? await validateGitHubPat(repoUrl, pat)
-      : await validateAdoPat(repoUrl, pat, organization!);
+  try {
+    console.log("[connectRepositoryAction] validation passed", {
+      provider,
+      repoUrl,
+      hasPat: !!pat,
+      organization,
+      outputFolder,
+    });
 
-  if (!validation.valid) {
-    return { success: false, message: validation.error };
+    // Validate PAT by making test API call to the provider
+    const validation =
+      provider === "github"
+        ? await validateGitHubPat(repoUrl, pat)
+        : await validateAdoPat(repoUrl, pat, organization!);
+
+    console.log("[connectRepositoryAction] PAT validation result", validation);
+
+    if (!validation.valid) {
+      return { success: false, message: validation.error };
+    }
+
+    await createRepository({
+      provider,
+      repoUrl,
+      pat,
+      organization: organization || null,
+      outputFolder,
+      applicationId,
+    });
+    console.log("[connectRepositoryAction] repository created successfully");
+  } catch (error) {
+    console.error("[connectRepositoryAction] error while connecting repository", error);
+    const message =
+      error instanceof Error && error.message
+        ? `Failed to connect repository: ${error.message}`
+        : "Failed to connect repository due to an unexpected error.";
+    return { success: false, message };
   }
-
-  await createRepository({
-    provider,
-    repoUrl,
-    pat,
-    organization: organization || null,
-    outputFolder,
-    applicationId,
-  });
 
   revalidatePath(`/applications/${applicationId}`);
   revalidatePath("/applications");

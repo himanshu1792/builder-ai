@@ -37,6 +37,13 @@ generated/
 .env*
 !.env.example
 
+# Claude / editor artifacts
+.claude/
+.cursor/
+
+# Archives
+*.7z
+
 # vercel
 .vercel
 

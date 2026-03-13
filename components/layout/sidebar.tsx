@@ -13,7 +13,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Sparkles,
-  ArrowLeft,
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -94,21 +93,6 @@ export function Sidebar({ appId, appName }: SidebarProps) {
         collapsed ? 'w-16' : 'w-60'
       )}
     >
-      {/* Back to AgentForge */}
-      <div className="border-b px-3 py-2">
-        <Link
-          href="/"
-          className={cn(
-            'flex items-center gap-2 rounded-lg px-2 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground',
-            collapsed && 'justify-center px-0'
-          )}
-          title={collapsed ? 'Back to AgentForge' : undefined}
-        >
-          <ArrowLeft className="h-4 w-4 shrink-0" />
-          {!collapsed && <span>Back to AgentForge</span>}
-        </Link>
-      </div>
-
       {/* Brand */}
       <div className="flex h-14 items-center border-b px-4">
         {!collapsed && (

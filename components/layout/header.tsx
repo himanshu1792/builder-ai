@@ -1,6 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,11 +10,12 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import { ArrowLeft } from 'lucide-react';
 import React from 'react';
 
 function buildBreadcrumbs(pathname: string) {
   const segments = pathname.split('/').filter(Boolean);
-  const crumbs: { label: string; href?: string }[] = [{ label: 'Home', href: '/create-agents' }];
+  const crumbs: { label: string; href?: string }[] = [{ label: 'Agent Builder', href: '/create-agents' }];
 
   let path = '';
   for (let i = 0; i < segments.length; i++) {
@@ -57,7 +59,7 @@ export function Header() {
   const crumbs = buildBreadcrumbs(pathname);
 
   return (
-    <header className="flex h-14 items-center border-b bg-card px-6">
+    <header className="flex h-14 items-center justify-between border-b bg-card px-6">
       <Breadcrumb>
         <BreadcrumbList>
           {crumbs.map((crumb, i) => (
@@ -74,6 +76,13 @@ export function Header() {
           ))}
         </BreadcrumbList>
       </Breadcrumb>
+      <Link
+        href="/"
+        className="inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        <span>Back</span>
+      </Link>
     </header>
   );
 }

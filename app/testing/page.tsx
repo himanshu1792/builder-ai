@@ -27,7 +27,7 @@ export default async function Dashboard() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-text-primary">
-            Command Center
+            Command Centre
           </h1>
           <p className="mt-1 text-sm text-text-secondary">
             AI-powered test generation. Describe what to test, get working

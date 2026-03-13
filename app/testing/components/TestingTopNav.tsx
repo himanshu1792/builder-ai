@@ -22,33 +22,6 @@ export function TestingTopNav() {
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-nav-bg/80 backdrop-blur-xl">
       <div className="flex h-14 items-center gap-1 px-4 sm:px-6 lg:px-10">
-        {/* Back to AgentForge */}
-        <Link
-          href="/"
-          className="group mr-4 flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-medium text-text-secondary transition-colors hover:bg-nav-hover hover:text-text-primary"
-        >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="transition-transform group-hover:-translate-x-0.5"
-          >
-            <path
-              d="M10 4L6 8L10 12"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          Back
-        </Link>
-
-        {/* Divider */}
-        <div className="mr-4 h-6 w-px bg-border" />
-
         {/* Logo */}
         <Link
           href="/testing"
@@ -115,6 +88,30 @@ export function TestingTopNav() {
 
         {/* Right side spacer */}
         <div className="ml-auto" />
+
+        {/* Back to AgentForge */}
+        <Link
+          href="/"
+          className="group flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-medium text-text-secondary transition-colors hover:bg-nav-hover hover:text-text-primary"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="transition-transform group-hover:-translate-x-0.5"
+          >
+            <path
+              d="M10 4L6 8L10 12"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          Back
+        </Link>
       </div>
     </nav>
   );

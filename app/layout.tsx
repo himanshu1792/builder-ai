@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { TopNav } from "./components/TopNav";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TestForge",
+  title: "AgentForge",
   description:
-    "AI-powered test generation platform — describe what to test in plain English and get a ready-to-merge PR with working Playwright scripts",
+    "Your unified AI agent platform — Build, test, deploy, and orchestrate intelligent agents.",
 };
 
 export default function RootLayout({
@@ -25,14 +25,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <TopNav />
-        <main className="w-full px-4 py-6 sm:px-6 lg:px-10">
-          {children}
-        </main>
+        {children}
+        <Toaster richColors position="top-right" />
       </body>
     </html>
   );

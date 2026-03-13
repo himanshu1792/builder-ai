@@ -76,7 +76,19 @@
       "Bash(npx prisma migrate dev --name add_type_and_test_plan)",
       "Bash(npx prisma migrate status)",
       "Bash(npx prisma db execute --stdin 2)",
-      "Bash(1:*)"
+      "Bash(1:*)",
+      "Bash(npm install drizzle-orm pg swr recharts sonner next-themes react-hook-form @hookform/resolvers lucide-react @paralleldrive/cuid2 nanoid openai class-variance-authority clsx tailwind-merge @radix-ui/react-dialog @radix-ui/react-dropdown-menu @radix-ui/react-label @radix-ui/react-select @radix-ui/react-separator @radix-ui/react-slot @radix-ui/react-tabs)",
+      "Bash(npm install tw-animate-css)",
+      "Bash(npm install shadcn)",
+      "Bash(# Also check for router.push and redirect calls in create-agents cd \"\"/c/Projects/tester agent\"\" grep -rn \"\"redirect\\\\|router.push\\\\|router.replace\"\" app/create-agents/ --include=\"\"*.tsx\"\" --include=\"\"*.ts\"\" || echo \"\"No router navigations found\"\" # Also check hooks for API paths - they should stay at /api/... without prefix grep -rn \"\"''/api/\"\" hooks/ --include=\"\"*.ts\"\")",
+      "Bash(npm install radix-ui)",
+      "Bash(npm install drizzle-kit)",
+      "Bash(npx drizzle-kit push)",
+      "Bash(npx drizzle-kit push --force)",
+      "Bash(npx drizzle-kit generate)",
+      "Bash(# Find psql where psql.exe || find \"\"/c/Program Files\"\" -name \"\"psql.exe\"\")",
+      "Bash(\"/c/Program Files/PostgreSQL/18/bin/psql.exe\" \"postgresql://postgres:admin@localhost:5432/Testforge\" -f \"/c/Projects/tester agent/drizzle/0000_icy_nebula.sql\")",
+      "Bash(npx tsx scripts/seed-model-pricing.ts)"
     ]
   }
 }

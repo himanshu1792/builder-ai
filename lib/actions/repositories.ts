@@ -47,18 +47,14 @@ export async function connectRepositoryAction(
     return { success: false, message: validation.error };
   }
 
-  try {
-    await createRepository({
-      provider,
-      repoUrl,
-      pat,
-      organization: organization || null,
-      outputFolder,
-      applicationId,
-    });
-  } catch {
-    return { success: false, message: "Failed to connect repository." };
-  }
+  await createRepository({
+    provider,
+    repoUrl,
+    pat,
+    organization: organization || null,
+    outputFolder,
+    applicationId,
+  });
 
   revalidatePath(`/applications/${applicationId}`);
   revalidatePath("/applications");
